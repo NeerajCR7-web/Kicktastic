@@ -1,1 +1,2 @@
 # Kicktastic
+Kicktastic is a CMS-based web application designed to manage local soccer tournaments. It enables team managers to register teams and players, allows league administrators to create schedules and manage the tournament, and engages viewers with match updates and live news.
