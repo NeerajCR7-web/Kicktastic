@@ -1,66 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Welcome to Kicktastic</title>
-    <style>
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>KickTastic</title>
+  <style>
+    /* ===== 1. RESET ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      color: #111;
+    }
+    body {
+      background: #f9f9f9;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-        .dropdown-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 180px;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown:hover .dropdown-button {
-            background-color: #2980b9;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Welcome to Kicktastic</h1>
-
-    <div class="dropdown">
-        <button class="dropdown-button">Login</button>
-        <div class="dropdown-content">
-            <a href="login.php?role=team_manager">Sign in as Manager</a>
-            <a href="login.php?role=league_admin">Sign in as Admin</a>
-        </div>
-    </div>
-
-    <p style="margin-top: 20px;">
-        Don't have an account? <a href="register.php">Register as Manager</a>
-    </p>
-
-</body>
-</html>
+    /* ===== 2. TOP BAR ===== */
+    .top-bar {
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+      padding: 0 1rem;
+    }
+    .top-bar .logo {
+      height: 100%;
+      width: auto;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .top-bar .title-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .top-bar .site-title {
+      color: #fff;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .top-bar .slogan {
+      color: #fff;
+      font-size: 1rem;
+      margin-top: -1.75rem;
+    }
