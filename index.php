@@ -241,3 +241,21 @@
       flex-direction: column;
       justify-content: space-between;
     }
+
+    .news-text .title {
+      font-size: 0.8125rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.25rem;
+    }
+    .news-text .description {
+      font-size: 0.6875rem;
+      color: #555;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+    .news-text .link {
+      font-size: 0.6875rem;
+      color: #3498db;
+      margin-top: 0.25rem;
+    }
