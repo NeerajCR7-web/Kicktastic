@@ -16,3 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
        $_SESSION['user_id'] = $user['id'];
     $_SESSION['role'] = $user['role'];
+
+      if ($user['role'] == 'league_admin') {
+        header("Location: admin/dashboard.php");
+    } else {
+        header("Location: manager/dashboard.php");
+    }
+    exit;
