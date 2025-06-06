@@ -13,3 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_GET['role']) && $_GET['role'] !== $user['role']) {
         die("Access denied for this role.");
     }
+
+       $_SESSION['user_id'] = $user['id'];
+    $_SESSION['role'] = $user['role'];
