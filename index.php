@@ -167,3 +167,21 @@
         height: 80px;
       }
     }
+
+    /* ===== 6. IMAGE SLIDER & CONTAINERS ===== */
+    .content-section {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 2rem 1rem;
+      background: #fefefe;
+      flex-wrap: wrap;
+    }
+    .slider-container {
+      position: relative;
+      width: 55%;
+      height: 300px;
+      background: #000;
+      overflow: hidden;
+      border-radius: 8px;
+    }
