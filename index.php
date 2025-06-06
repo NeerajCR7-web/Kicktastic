@@ -96,3 +96,32 @@
       display: flex;
       align-items: center;
     }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      margin-top: 0.5rem;
+      background-color: #98caeb;
+      min-width: 260px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-radius: 4px;
+      z-index: 1000;
+      padding: 12px;
+    }
+    .dropdown-content.show {
+      display: block;
+    }
+    .signin-container {
+      display: flex;
+      gap: 8px;
+    }
+    .signin-box {
+      flex: 1;
+      background-color: #f9f9f9;
+      padding: 10px 12px;
+      border-radius: 30px;
+      text-align: center;
+      color: #000;
+      font-size: 0.875rem;
+      transition: background-color 0.2s;
+    }
