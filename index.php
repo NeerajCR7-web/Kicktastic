@@ -294,3 +294,15 @@
       gap: 0.5rem;
       margin-bottom: 0.5rem;
     }
+.schedule-box .team {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .schedule-box .team img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.25rem;
+    }
