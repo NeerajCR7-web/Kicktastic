@@ -78,3 +78,21 @@
       background-color: rgba(255,255,255,0.2);
       border-radius: 4px;
     }
+
+    /* ===== 4. DROPDOWN ===== */
+    .dropdown {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .dropdown-button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
