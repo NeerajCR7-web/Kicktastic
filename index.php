@@ -259,3 +259,23 @@
       color: #3498db;
       margin-top: 0.25rem;
     }
+     /* ===== 8. SCHEDULE PREVIEW ===== */
+    .schedule-section {
+      padding: 2rem 1rem;
+      background: #000;
+      border-radius: 20px;
+      margin: 2rem 1rem;
+    }
+    .schedule-heading {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: #fff;
+    }
+    .schedule-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
