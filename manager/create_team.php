@@ -18,3 +18,7 @@ if (!empty($_FILES['logo']['name'])) {
         $logo_path = $logo_name;
     }
 }
+
+$stmt = $conn->prepare("INSERT INTO teams (team_name, user_id, college, logo_url) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("siss", $team_name, $user_id, $college, $logo_path);
+$stmt->execute();
