@@ -23,3 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: manager/dashboard.php");
     }
     exit;
+
+    else {
+        echo "Invalid credentials.";
+    }
