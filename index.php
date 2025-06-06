@@ -279,3 +279,18 @@
       gap: 1rem;
       justify-content: center;
     }
+.schedule-box {
+      background: #fff;
+      border-radius: 30px;
+      padding: 1rem;
+      width: 220px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .schedule-box .teams-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
