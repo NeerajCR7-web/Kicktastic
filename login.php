@@ -8,26 +8,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $user = $stmt->get_result()->fetch_assoc();
-   if ($user && password_verify($password, $user['password'])){
+   if ($user && password_verify($password, $user['password'])) {
     // Check if selected role matches actual user role
     if (isset($_GET['role']) && $_GET['role'] !== $user['role']) {
         die("Access denied for this role.");
     }
 
-       $_SESSION['user_id'] = $user['id'];
+    $_SESSION['user_id'] = $user['id'];
     $_SESSION['role'] = $user['role'];
 
-      if ($user['role'] == 'league_admin') {
+    if ($user['role'] == 'league_admin') {
         header("Location: admin/dashboard.php");
     } else {
         header("Location: manager/dashboard.php");
     }
     exit;
-   }
-    else {
+}
+ else {
         echo "Invalid credentials.";
     }
-    }
+}
 ?>
 <form method="POST">
     Email: <input type="email" name="email" required><br>
