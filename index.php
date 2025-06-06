@@ -150,3 +150,20 @@
       gap: 2rem;
       animation: scroll-left 20s linear infinite;
     }
+    .team-slider-track img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ddd;
+    }
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (min-width: 640px) {
+      .team-slider-track img {
+        width: 80px;
+        height: 80px;
+      }
+    }
