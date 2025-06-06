@@ -306,3 +306,26 @@
       object-fit: cover;
       margin-bottom: 0.25rem;
     }
+    .schedule-box .team-name {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333;
+      white-space: nowrap;
+    }
+    .schedule-box .match-date {
+      font-size: 0.875rem;
+      color: #333;
+      margin-top: 0.5rem;
+    }
+    .view-full-link {
+      display: block;
+      margin: 1.5rem auto 0;
+      text-align: center;
+      font-size: 1rem;
+      color: #3498db;
+      font-weight: bold;
+      width: fit-content;
+    }
+    .view-full-link:hover {
+      text-decoration: underline;
+    }
