@@ -229,3 +229,15 @@
       overflow: hidden;
       height: 90px;
     }
+    .news-item img {
+      width: 70px;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .news-text {
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
