@@ -12,3 +12,9 @@ $team = $conn->query("SELECT * FROM teams WHERE user_id = $user_id")->fetch_asso
 
 $players = $team ? $conn->query("SELECT * FROM players WHERE team_id = {$team['id']}") : null;
 $player_count = $players ? $players->num_rows : 0;
+
+// Handle team creation
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_team'])) {
+    $team_name = $_POST['team_name'];
+    $college = $_POST['college'];
+    $logo_url = "";
