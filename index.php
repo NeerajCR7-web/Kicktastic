@@ -125,3 +125,17 @@
       font-size: 0.875rem;
       transition: background-color 0.2s;
     }
+    .signin-box:hover {
+      background-color: #e0e0e0;
+    }
+    .register-link {
+      display: block;
+      margin-top: 12px;
+      text-align: center;
+      color: #555;
+      font-size: 0.8125rem;
+      transition: color 0.2s;
+    }
+    .register-link:hover {
+      color: #3498db;
+    }
