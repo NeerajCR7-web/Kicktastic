@@ -14,3 +14,7 @@ if (!empty($_FILES['logo']['name'])) {
     }
   $logo_name = time() . "_" . basename($_FILES["logo"]["name"]);
     $target_file = $upload_dir . $logo_name;
+    if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
+        $logo_path = $logo_name;
+    }
+}
