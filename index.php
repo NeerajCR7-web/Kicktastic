@@ -59,3 +59,22 @@
       font-size: 1rem;
       margin-top: -1.75rem;
     }
+
+     /* ===== 3. NAV MENU ===== */
+    .menu-bar {
+      background-color: #3498db;
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem 0;
+    }
+    .menu-bar a {
+      color: #fff;
+      font-size: 1rem;
+      margin: 0 1rem;
+      padding: 0.25rem 0.5rem;
+      transition: background-color 0.2s;
+    }
+    .menu-bar a:hover {
+      background-color: rgba(255,255,255,0.2);
+      border-radius: 4px;
+    }
