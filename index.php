@@ -185,3 +185,29 @@
       overflow: hidden;
       border-radius: 8px;
     }
+    .slider-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .slider-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slider-button.prev {
+      left: 8px;
+    }
+    .slider-button.next {
+      right: 8px;
+    }
