@@ -12,3 +12,5 @@ if (!empty($_FILES['logo']['name'])) {
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0777, true); // create uploads folder if it doesn't exist
     }
+  $logo_name = time() . "_" . basename($_FILES["logo"]["name"]);
+    $target_file = $upload_dir . $logo_name;
