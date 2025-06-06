@@ -139,3 +139,14 @@
     .register-link:hover {
       color: #3498db;
     }
+    /* ===== 5. TEAM LOGO SLIDER ===== */
+    .team-slider-container {
+      overflow: hidden;
+      background: #fff;
+      padding: 1rem 0;
+    }
+    .team-slider-track {
+      display: flex;
+      gap: 2rem;
+      animation: scroll-left 20s linear infinite;
+    }
