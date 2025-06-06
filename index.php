@@ -211,3 +211,21 @@
     .slider-button.next {
       right: 8px;
     }
+    /* ===== 7. NEWS CONTAINER ===== */
+    .news-container {
+      width: 40%;
+      height: 300px;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 0.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .news-item {
+      display: flex;
+      background: #f9f9f9;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+      height: 90px;
+    }
