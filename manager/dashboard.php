@@ -29,3 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_team'])) {
             $logo_url = $image_name;
         }
     }
+
+     $stmt = $conn->prepare("INSERT INTO teams (user_id, team_name, college, logo_url) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("isss", $user_id, $team_name, $college, $logo_url);
+    $stmt->execute();
+    header("Location: dashboard.php");
+    exit;
+}
