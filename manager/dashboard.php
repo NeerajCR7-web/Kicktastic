@@ -18,3 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_team'])) {
     $team_name = $_POST['team_name'];
     $college = $_POST['college'];
     $logo_url = "";
+
+       if (!empty($_FILES['logo']['name'])) {
+        $upload_dir = "../uploads/";
+        if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
+        $image_name = time() . "_" . basename($_FILES["logo"]["name"]);
+        $target_file = $upload_dir . $image_name;
+
+        if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
+            $logo_url = $image_name;
+        }
+    }
