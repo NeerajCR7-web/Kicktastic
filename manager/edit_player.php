@@ -15,3 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $position = $_POST['position'];
     $jersey = $_POST['jersey'];
     $image_url = $player['image_url'];
+
+    
+    if (!empty($_FILES['image']['name'])) {
+        $upload_dir = "../uploads/";
+        $image_name = time() . "_" . basename($_FILES["image"]["name"]);
+        $target_file = $upload_dir . $image_name;
+
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+            $image_url = $image_name;
+        }
+    }
