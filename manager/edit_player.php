@@ -26,3 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $image_url = $image_name;
         }
     }
+     $stmt = $conn->prepare("UPDATE players SET name = ?, position = ?, jersey_number = ?, image_url = ? WHERE id = ?");
+    $stmt->bind_param("ssisi", $name, $position, $jersey, $image_url, $player_id);
+    $stmt->execute();
+
+    header("Location: players.php");
+    exit;
+}
+?>
