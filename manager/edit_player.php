@@ -48,3 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     Change Image: <input type="file" name="image"><br><br>
     <input type="submit" value="Update Player">
 </form>
+
+<br>
+<a href="players.php">Back to Player List</a>
