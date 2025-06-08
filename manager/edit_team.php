@@ -27,3 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $logo_path = $logo_name;
         }
     }
+     $stmt = $conn->prepare("UPDATE teams SET team_name = ?, college = ?, logo_url = ? WHERE user_id = ?");
+    $stmt->bind_param("sssi", $team_name, $college, $logo_path, $user_id);
+    $stmt->execute();
+
+    header("Location: dashboard.php");
+    exit;
