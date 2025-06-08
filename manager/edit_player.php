@@ -34,3 +34,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 ?>
+
+<h2>Edit Player</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    Name: <input type="text" name="name" value="<?= $player['name'] ?>" required><br>
+    Position: <input type="text" name="position" value="<?= $player['position'] ?>" required><br>
+    Jersey #: <input type="number" name="jersey" value="<?= $player['jersey_number'] ?>" required><br>
+    <?php if ($player['image_url']): ?>
+        Current Image:<br>
+        <img src="../uploads/<?= $player['image_url'] ?>" width="100"><br>
+    <?php endif; ?>
+    Change Image: <input type="file" name="image"><br><br>
+    <input type="submit" value="Update Player">
+</form>
