@@ -16,3 +16,15 @@ if (!isset($_GET['team_id'])) {
     echo "No team selected.";
     exit;
 }
+$team_id = intval($_GET['team_id']);
+
+// Fetch team info
+$team_result = $conn->query("SELECT t.team_name, u.name AS manager_name, u.id AS manager_id 
+                             FROM teams t JOIN users u ON t.user_id = u.id 
+                             WHERE t.id = $team_id");
+$team = $team_result->fetch_assoc();
+
+if (!$team) {
+    echo "Team not found.";
+    exit;
+}
