@@ -47,3 +47,8 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
         </style>
 </head>
 <body>
+
+<h2>All Registered Teams</h2>
+
+<?php while($team = $teams->fetch_assoc()): ?>
+    <div class="team-card">
