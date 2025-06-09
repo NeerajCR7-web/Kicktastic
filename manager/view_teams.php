@@ -58,3 +58,6 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
           <?php if (!empty($team['logo_url'])): ?>
             <img src="../uploads/<?= $team['logo_url'] ?>" class="logo"><br><br>
         <?php endif; ?>
+
+        <?php if ($is_admin || $is_manager): ?>
+            <a href="view_players.php?team_id=<?= $team['id'] ?>" class="btn">View Players</a>
