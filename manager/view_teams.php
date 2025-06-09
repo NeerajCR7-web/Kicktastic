@@ -63,3 +63,10 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
             <a href="view_players.php?team_id=<?= $team['id'] ?>" class="btn">View Players</a>
             <?php endif; ?>
     </div>
+    <?php endwhile; ?>
+
+<br><br>
+<a href="dashboard.php">Back to Dashboard</a>
+
+</body>
+</html>
