@@ -59,3 +59,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         ?>
     </select><br><br>
+
+    Current Logo:<br>
+    <?php if ($team['logo_url']): ?>
+        <img src="../uploads/<?= $team['logo_url'] ?>" width="120"><br>
+    <?php endif; ?>
+
+    Change Logo: <input type="file" name="logo"><br><br>
+
+    <input type="submit" value="Update Team">
+</form>
+
+<br>
+<a href="dashboard.php">Back to Dashboard</a>
