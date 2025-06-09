@@ -19,3 +19,13 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
 <head>
     <title>All Registered Teams</title>
     <style>
+        .team-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            width: 300px;
+            display: inline-block;
+            vertical-align: top;
+            text-align: center;
+        }
