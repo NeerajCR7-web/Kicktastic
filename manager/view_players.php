@@ -36,3 +36,18 @@ $can_edit = ($role === 'admin') || ($role === 'team_manager' && $team['manager_i
 
 // Fetch players
 $players_result = $conn->query("SELECT * FROM players WHERE team_id = $team_id");
+
+if ($players_result->num_rows > 0) {
+    echo "<table border='1' cellpadding='10'>";
+    echo "<tr><th>Image</th><th>Name</th><th>Position</th><th>Jersey #</th>";
+    if ($can_edit) echo "<th>Edit</th>";
+    echo "</tr>";
+
+    while ($player = $players_result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>";
+        if (!empty($player['image_url'])) {
+            echo "<img src='../uploads/" . htmlspecialchars($player['image_url']) . "' width='50'>";
+        } else {
+            echo "No Image";
+        }
