@@ -33,3 +33,14 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
             width: 80px;
             height: auto;
         }
+         .btn {
+            padding: 8px 12px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #218838;
+        }
