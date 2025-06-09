@@ -55,3 +55,6 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
         <h3><?= htmlspecialchars($team['team_name']) ?></h3>
         <p><strong>Manager:</strong> <?= htmlspecialchars($team['manager_name']) ?></p>
         <p><strong>College:</strong> <?= htmlspecialchars($team['college']) ?></p>
+          <?php if (!empty($team['logo_url'])): ?>
+            <img src="../uploads/<?= $team['logo_url'] ?>" class="logo"><br><br>
+        <?php endif; ?>
