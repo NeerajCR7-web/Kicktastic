@@ -28,3 +28,5 @@ if (!$team) {
     echo "Team not found.";
     exit;
 }
+"<h2>Players from Team: " . htmlspecialchars($team['team_name']) . "</h2>";
+echo "<p>Manager: " . htmlspecialchars($team['manager_name']) . "</p>";
