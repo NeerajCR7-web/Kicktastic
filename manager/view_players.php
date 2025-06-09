@@ -30,3 +30,9 @@ if (!$team) {
 }
 "<h2>Players from Team: " . htmlspecialchars($team['team_name']) . "</h2>";
 echo "<p>Manager: " . htmlspecialchars($team['manager_name']) . "</p>";
+
+// Check if current user is allowed to edit (admin or this team's manager)
+$can_edit = ($role === 'admin') || ($role === 'team_manager' && $team['manager_id'] == $user_id);
+
+// Fetch players
+$players_result = $conn->query("SELECT * FROM players WHERE team_id = $team_id");
