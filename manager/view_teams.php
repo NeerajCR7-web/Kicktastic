@@ -61,3 +61,5 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
 
         <?php if ($is_admin || $is_manager): ?>
             <a href="view_players.php?team_id=<?= $team['id'] ?>" class="btn">View Players</a>
+            <?php endif; ?>
+    </div>
