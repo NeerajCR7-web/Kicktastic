@@ -65,3 +65,4 @@ if ($players_result->num_rows > 0) {
     echo "<p>No players found for this team.</p>";
 }
 echo "<br><a href='view_teams.php'>Back to Teams</a>";
+?>
