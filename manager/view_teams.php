@@ -29,3 +29,7 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
             vertical-align: top;
             text-align: center;
         }
+        img.logo {
+            width: 80px;
+            height: auto;
+        }
