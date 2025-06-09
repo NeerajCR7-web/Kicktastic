@@ -13,3 +13,9 @@ $is_manager = $_SESSION['role'] === 'team_manager';
 $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams 
                        JOIN users ON teams.user_id = users.id");
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Registered Teams</title>
+    <style>
