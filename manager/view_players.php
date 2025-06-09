@@ -51,3 +51,12 @@ if ($players_result->num_rows > 0) {
         } else {
             echo "No Image";
         }
+        echo "</td>";
+        echo "<td>" . htmlspecialchars($player['name']) . "</td>";
+        echo "<td>" . htmlspecialchars($player['position']) . "</td>";
+        echo "<td>#" . htmlspecialchars($player['jersey_number']) . "</td>";
+        if ($can_edit) {
+            echo "<td><a href='edit_player.php?id=" . $player['id'] . "'>🖉 Edit</a></td>";
+        }
+        echo "</tr>";
+    }
