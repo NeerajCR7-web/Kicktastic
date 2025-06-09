@@ -35,3 +35,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 ?>
+
+<h2>Edit Team Info</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    Team Name: <input type="text" name="team_name" value="<?= $team['team_name'] ?>" required><br><br>
+
+    College:
+    <select name="college" required>
+        <option value="">--Select College--</option>
+        <?php
+        $colleges = [
+            "Humber College",
+            "Seneca College",
+            "George Brown College",
+            "Centennial College",
+            "Sheridan College",
+            "Toronto Metropolitan University"
+        ];
