@@ -60,3 +60,7 @@ if ($players_result->num_rows > 0) {
         }
         echo "</tr>";
     }
+    echo "</table>";
+} else {
+    echo "<p>No players found for this team.</p>";
+}
