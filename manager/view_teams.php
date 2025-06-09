@@ -52,3 +52,6 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
 
 <?php while($team = $teams->fetch_assoc()): ?>
     <div class="team-card">
+        <h3><?= htmlspecialchars($team['team_name']) ?></h3>
+        <p><strong>Manager:</strong> <?= htmlspecialchars($team['manager_name']) ?></p>
+        <p><strong>College:</strong> <?= htmlspecialchars($team['college']) ?></p>
