@@ -53,3 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "Sheridan College",
             "Toronto Metropolitan University"
         ];
+         foreach ($colleges as $college) {
+            $selected = ($college === $team['college']) ? 'selected' : '';
+            echo "<option value=\"$college\" $selected>$college</option>";
+        }
+        ?>
+    </select><br><br>
