@@ -50,8 +50,12 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
         }
 
         img.logo {
-            width: 80px;
-            height: auto;
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
         }
          .btn {
             padding: 8px 12px;
