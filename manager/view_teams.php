@@ -45,6 +45,10 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
             text-align: center;
             transition: transform 0.2s ease;
         }
+          .team-card:hover {
+            transform: translateY(-5px);
+        }
+
         img.logo {
             width: 80px;
             height: auto;
