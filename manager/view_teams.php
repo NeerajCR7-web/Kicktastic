@@ -58,15 +58,19 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
             border-radius: 8px;
         }
          .btn {
-            padding: 8px 12px;
-            background: #28a745;
+            padding: 10px 16px;
+            background: #007bff;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 12px;
+            transition: background 0.3s ease;
         }
 
         .btn:hover {
-            background: #218838;
+            background: #0056b3;
         }
         </style>
 </head>
