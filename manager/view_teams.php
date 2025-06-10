@@ -34,14 +34,16 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
             color: #333;
         }
         .team-card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px;
+          background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 15px;
             width: 300px;
             display: inline-block;
             vertical-align: top;
             text-align: center;
+            transition: transform 0.2s ease;
         }
         img.logo {
             width: 80px;
