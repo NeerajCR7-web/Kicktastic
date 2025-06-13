@@ -106,7 +106,7 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
     <?php endwhile; ?>
 
 <br><br>
-<a href="dashboard.php">Back to Dashboard</a>
+<a href="dashboard.php">Back to </a>
 
 </body>
 </html>
