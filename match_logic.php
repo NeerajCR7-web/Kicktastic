@@ -105,3 +105,13 @@ function renderMatchBox(string $matchKey, array $team1, array $team2, string $da
                 . " data-highlight='{$dh}'"
                 . " onclick=\"openModal('{$matchKey}')\"";
     }
+
+    echo "<div class='match-box'{$attrs}>\n";
+    echo "  <strong>{$matchKey}:</strong> \n";
+    echo "  <img src='uploads/{$team1['logo_url']}' width='30' alt='logo'> "
+         . htmlspecialchars($team1['team_name'], ENT_QUOTES)
+         . " vs "
+         . "<img src='uploads/{$team2['logo_url']}' width='30' alt='logo'> "
+         . htmlspecialchars($team2['team_name'], ENT_QUOTES)
+         . "<br>\n";
+    echo "  <em>Date:</em> {$dateTime}<br>\n";
