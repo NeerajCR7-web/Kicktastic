@@ -90,3 +90,8 @@ function getFinalists(PDO $pdo) {
     $winner2 = (intval($allResults['SF2']['score1']) > intval($allResults['SF2']['score2'])) ? $sf2_t1 : $sf2_t2;
     return [$winner1, $winner2];
 }
+function renderMatchBox(string $matchKey, array $team1, array $team2, string $dateTime, array $allResults, bool $isEditable) {
+    $ds1 = isset($allResults[$matchKey]) ? intval($allResults[$matchKey]['score1']) : '';
+    $ds2 = isset($allResults[$matchKey]) ? intval($allResults[$matchKey]['score2']) : '';
+    $dm  = isset($allResults[$matchKey]) ? htmlspecialchars($allResults[$matchKey]['motm'], ENT_QUOTES) : '';
+    $dh  = isset($allResults[$matchKey]) ? htmlspecialchars($allResults[$matchKey]['highlight_url'], ENT_QUOTES) : '';
