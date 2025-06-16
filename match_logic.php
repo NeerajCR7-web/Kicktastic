@@ -18,5 +18,15 @@ function getRoundRobinMatches(array $fourTeams) {
     }
     return $pairs;
 }
+function getAllResults(PDO $pdo) {
+    $stmt = $pdo->query("SELECT * FROM match_results");
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $out  = [];
+    foreach ($rows as $r) {
+        $out[ $r['match_key'] ] = $r;
+    }
+    return $out;
+}
+
 
 
