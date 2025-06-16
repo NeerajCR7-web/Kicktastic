@@ -51,3 +51,12 @@ function computeGroupStandings(PDO $pdo) {
         ];
     }
 
+$statsB = [];
+    foreach ($groupB as $t) {
+        $statsB[$t['id']] = [
+            'id' => $t['id'],
+            'name' => $t['team_name'],
+            'played' => 0, 'won' => 0, 'draw' => 0, 'lost' => 0,
+            'gf' => 0, 'ga' => 0, 'points' => 0, 'form' => []
+        ];
+    }
