@@ -47,3 +47,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             width: 400px;
         }
+         .register-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .register-box label {
+            font-weight: 500;
+            display: block;
+            margin: 12px 0 6px;
+            color: #333;
+        }
+
+        .register-box input[type="text"],
+        .register-box input[type="email"],
+        .register-box input[type="password"] {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
