@@ -95,3 +95,13 @@ function renderMatchBox(string $matchKey, array $team1, array $team2, string $da
     $ds2 = isset($allResults[$matchKey]) ? intval($allResults[$matchKey]['score2']) : '';
     $dm  = isset($allResults[$matchKey]) ? htmlspecialchars($allResults[$matchKey]['motm'], ENT_QUOTES) : '';
     $dh  = isset($allResults[$matchKey]) ? htmlspecialchars($allResults[$matchKey]['highlight_url'], ENT_QUOTES) : '';
+
+    $attrs = "";
+    if ($isEditable) {
+        $attrs .= " id='{$matchKey}'"
+                . " data-score1='{$ds1}'"
+                . " data-score2='{$ds2}'"
+                . " data-motm='{$dm}'"
+                . " data-highlight='{$dh}'"
+                . " onclick=\"openModal('{$matchKey}')\"";
+    }
