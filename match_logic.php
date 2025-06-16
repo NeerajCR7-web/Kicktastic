@@ -66,3 +66,11 @@ $statsB = [];
 
     return [$statsA, $statsB];
 }
+function getSemifinalists(PDO $pdo) {
+    list($statsA, $statsB) = computeGroupStandings($pdo);
+    if (count($statsA) < 2 || count($statsB) < 2) return [];
+
+    $sf1 = ['team1' => $statsA[0]['id'], 'team2' => $statsB[1]['id']];
+    $sf2 = ['team1' => $statsB[0]['id'], 'team2' => $statsA[1]['id']];
+    return [$sf1, $sf2];
+}
