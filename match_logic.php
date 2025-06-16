@@ -119,3 +119,8 @@ function renderMatchBox(string $matchKey, array $team1, array $team2, string $da
         echo "  <strong>Score:</strong> {$allResults[$matchKey]['score1']} - {$allResults[$matchKey]['score2']}<br>\n";
         echo "  <strong>MOTM:</strong> {$allResults[$matchKey]['motm']}<br>\n";
         echo "  <a href='{$allResults[$matchKey]['highlight_url']}' target='_blank'>Watch Highlights</a>\n";
+        } else {
+        echo "  <em>Not Played Yet</em>\n";
+    }
+    echo "</div>\n";
+}
