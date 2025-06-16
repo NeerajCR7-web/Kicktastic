@@ -80,3 +80,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             cursor: pointer;
             margin-top: 20px;
         }
+ .register-box input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .success {
+            text-align: center;
+            color: green;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .error {
+            text-align: center;
+            color: red;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
