@@ -74,3 +74,8 @@ function getSemifinalists(PDO $pdo) {
     $sf2 = ['team1' => $statsB[0]['id'], 'team2' => $statsA[1]['id']];
     return [$sf1, $sf2];
 }
+function getFinalists(PDO $pdo) {
+    $allResults = getAllResults($pdo);
+    if (!isset($allResults['SF1']) || !isset($allResults['SF2'])) {
+        return null;
+    }
