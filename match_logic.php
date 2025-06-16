@@ -115,3 +115,7 @@ function renderMatchBox(string $matchKey, array $team1, array $team2, string $da
          . htmlspecialchars($team2['team_name'], ENT_QUOTES)
          . "<br>\n";
     echo "  <em>Date:</em> {$dateTime}<br>\n";
+    if (isset($allResults[$matchKey])) {
+        echo "  <strong>Score:</strong> {$allResults[$matchKey]['score1']} - {$allResults[$matchKey]['score2']}<br>\n";
+        echo "  <strong>MOTM:</strong> {$allResults[$matchKey]['motm']}<br>\n";
+        echo "  <a href='{$allResults[$matchKey]['highlight_url']}' target='_blank'>Watch Highlights</a>\n";
