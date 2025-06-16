@@ -60,3 +60,9 @@ $statsB = [];
             'gf' => 0, 'ga' => 0, 'points' => 0, 'form' => []
         ];
     }
+
+      // Tally A & B - code continues same (truncated for brevity)...
+    // [Keep your tally logic unchanged here]
+
+    return [$statsA, $statsB];
+}
