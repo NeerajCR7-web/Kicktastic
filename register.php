@@ -97,3 +97,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-weight: 600;
             margin-bottom: 15px;
         }
+         .register-box a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .register-box a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
