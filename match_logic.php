@@ -28,5 +28,10 @@ function getAllResults(PDO $pdo) {
     return $out;
 }
 
+function computeGroupStandings(PDO $pdo) {
+    $allTeams = getAllTeams($pdo);
+    if (count($allTeams) !== 8) {
+        return [[], []]; // Return empty if not 8 teams
+    }
 
 
