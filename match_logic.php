@@ -34,4 +34,10 @@ function computeGroupStandings(PDO $pdo) {
         return [[], []]; // Return empty if not 8 teams
     }
 
+    
+    $groupA = array_slice($allTeams, 0, 4);
+    $groupB = array_slice($allTeams, 4, 4);
+    $matchesA = getRoundRobinMatches($groupA);
+    $matchesB = getRoundRobinMatches($groupB);
+    $allResults = getAllResults($pdo);
 
