@@ -79,3 +79,14 @@ function getFinalists(PDO $pdo) {
     if (!isset($allResults['SF1']) || !isset($allResults['SF2'])) {
         return null;
     }
+
+    list($sf1Match, $sf2Match) = getSemifinalists($pdo);
+    $sf1_t1 = $sf1Match['team1'];
+    $sf1_t2 = $sf1Match['team2'];
+    $sf2_t1 = $sf2Match['team1'];
+    $sf2_t2 = $sf2Match['team2'];
+
+    $winner1 = (intval($allResults['SF1']['score1']) > intval($allResults['SF1']['score2'])) ? $sf1_t1 : $sf1_t2;
+    $winner2 = (intval($allResults['SF2']['score1']) > intval($allResults['SF2']['score2'])) ? $sf2_t1 : $sf2_t2;
+    return [$winner1, $winner2];
+}
