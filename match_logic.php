@@ -41,3 +41,13 @@ function computeGroupStandings(PDO $pdo) {
     $matchesB = getRoundRobinMatches($groupB);
     $allResults = getAllResults($pdo);
 
+     $statsA = [];
+    foreach ($groupA as $t) {
+        $statsA[$t['id']] = [
+            'id' => $t['id'],
+            'name' => $t['team_name'],
+            'played' => 0, 'won' => 0, 'draw' => 0, 'lost' => 0,
+            'gf' => 0, 'ga' => 0, 'points' => 0, 'form' => []
+        ];
+    }
+
