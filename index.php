@@ -1,8 +1,6 @@
 <?php
-// Include database connection to fetch registered teams and prepare schedule
 require 'includes/db.php';
 
-// ----- Fetch registered teams (for logo slider) -----
 $teamLogos = [];
 $teamsResult = $conn->query("SELECT id, team_name, logo_url FROM teams ORDER BY id ASC");
 $allTeamsById = [];
@@ -13,10 +11,8 @@ while ($row = $teamsResult->fetch_assoc()) {
         'logo_url'  => $row['logo_url']
     ];
 }
-// Duplicate logos for seamless scrolling
 $duplicatedLogos = array_merge($teamLogos, $teamLogos);
 
-// ----- Define soccer-related images for the left slider -----
 $soccerImages = [
     'assets/images/1.png',
     'assets/images/2.jpg',
@@ -33,14 +29,13 @@ $soccerImages = [
 
 ];
 
-// ----- Build group-stage matches for schedule preview -----
 $allTeams = [];
 $allTeamsResult = $conn->query("SELECT id, team_name, logo_url FROM teams ORDER BY id ASC");
 while ($row = $allTeamsResult->fetch_assoc()) {
     $allTeams[] = $row;
 }
 
-// Ensure exactly 8 teams
+//Ensures only 8 teams are there
 if (count($allTeams) === 8) {
     shuffle($allTeams);
     $groupA = array_slice($allTeams, 0, 4);
@@ -62,7 +57,7 @@ if (count($allTeams) === 8) {
     $groupA_matches = getMatches($groupA); // 6 matches
     $groupB_matches = getMatches($groupB); // 6 matches
 
-    // ----- Compute Standings for Group A & Group B -----
+    // Generate standings for Group A
     $statsA = [];
     foreach ($groupA as $team) {
         $statsA[$team['id']] = [
