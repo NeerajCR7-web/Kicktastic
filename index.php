@@ -67,6 +67,7 @@ if (count($allTeams) === 8) {
             'points'    => 0
         ];
     }
+    // Generate standings for Group A
     $statsB = [];
     foreach ($groupB as $team) {
         $statsB[$team['id']] = [
@@ -77,7 +78,6 @@ if (count($allTeams) === 8) {
         ];
     }
 
-    // Build name→ID lookup for group teams
     $nameToIdA = [];
     foreach ($groupA as $t) {
         $nameToIdA[$t['team_name']] = $t['id'];
@@ -87,7 +87,7 @@ if (count($allTeams) === 8) {
         $nameToIdB[$t['team_name']] = $t['id'];
     }
 
-    // Fetch all saved match results
+    // Fetching all saved match results
     $res = $conn->query("SELECT match_key, score1, score2 FROM match_results");
     while ($row = $res->fetch_assoc()) {
         $key = $row['match_key'];
