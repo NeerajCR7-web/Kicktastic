@@ -480,7 +480,7 @@ if (count($allTeams) === 8) {
       text-decoration: underline;
     }
 
-    /* ===== 9. STANDINGS PREVIEW WITH COLOR SCHEME ===== */
+    /* Standings Container */
     .standings-section {
       background: #000;
       border-radius: 20px;
