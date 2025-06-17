@@ -282,7 +282,7 @@ if (count($allTeams) === 8) {
       color: #3498db;
     }
 
-    /* ===== 5. TEAM LOGO SLIDER ===== */
+    /* Team Logo Slider */
     .team-slider-container {
       overflow: hidden;
       background: #fff;
@@ -317,7 +317,7 @@ if (count($allTeams) === 8) {
       }
     }
 
-    /* ===== 6. IMAGE SLIDER & CONTAINERS ===== */
+    /*  Soccer Image Slider */
     .content-section {
       display: flex;
       justify-content: space-between;
