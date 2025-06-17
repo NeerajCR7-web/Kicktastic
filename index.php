@@ -559,7 +559,7 @@ if (count($allTeams) === 8) {
       text-decoration: underline;
     }
 
-    /* ===== 10. FOOTER ===== */
+    /* Footer */
     .site-footer {
       background-color: #000;
       color: #fff;
