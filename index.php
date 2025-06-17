@@ -361,7 +361,7 @@ if (count($allTeams) === 8) {
       right: 8px;
     }
 
-    /* ===== 7. NEWS CONTAINER ===== */
+    /* News Container */
     .news-container {
       width: 40%;
       height: 300px;
@@ -409,7 +409,7 @@ if (count($allTeams) === 8) {
       margin-top: 0.25rem;
     }
 
-    /* ===== 8. SCHEDULE PREVIEW ===== */
+    /* Schedule Container */
     .schedule-section {
       padding: 2rem 1rem;
       background: #000;
