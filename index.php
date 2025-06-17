@@ -94,7 +94,7 @@ if (count($allTeams) === 8) {
         $s1  = intval($row['score1']);
         $s2  = intval($row['score2']);
 
-        // Group A matches: key starts with "A"
+        // Group A matches
         if (strpos($key, 'A') === 0) {
             $idx = intval(substr($key, 1));
             if (isset($groupA_matches[$idx])) {
@@ -112,7 +112,7 @@ if (count($allTeams) === 8) {
                 }
             }
         }
-        // Group B matches: key starts with "B"
+        // Group B matches
         elseif (strpos($key, 'B') === 0) {
             $idx = intval(substr($key, 1));
             if (isset($groupB_matches[$idx])) {
@@ -132,7 +132,7 @@ if (count($allTeams) === 8) {
         }
     }
 
-    // Sort each group’s standings by points descending
+    // Sorting each group's standing
     usort($statsA, function($a, $b) {
         return $b['points'] - $a['points'];
     });
@@ -151,7 +151,6 @@ if (count($allTeams) === 8) {
   />
   <title>KickTastic</title>
   <style>
-    /* ===== 1. RESET ===== */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -170,7 +169,7 @@ if (count($allTeams) === 8) {
       color: inherit;
     }
 
-    /* ===== 2. TOP BAR ===== */
+    /* Top Bar */
     .top-bar {
       background-color: #000;
       display: flex;
@@ -203,7 +202,7 @@ if (count($allTeams) === 8) {
       margin-top: -0.75rem;
     }
 
-    /* ===== 3. NAV MENU ===== */
+    /* Navigation Menu*/
     .menu-bar {
       background-color: #3498db;
       display: flex;
@@ -222,7 +221,7 @@ if (count($allTeams) === 8) {
       border-radius: 4px;
     }
 
-    /* ===== 4. DROPDOWN ===== */
+    /* Dropdown Menu */
     .dropdown {
       position: relative;
       flex-shrink: 0;
