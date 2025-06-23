@@ -75,7 +75,7 @@ foreach ($groupA as $team) {
         'gf'      => 0,
         'ga'      => 0,
         'points'  => 0,
-        'form'    => []  // chronological 'W','D','L'
+        'form'    => []  
     ];
 }
 $statsB = [];
@@ -94,9 +94,7 @@ foreach ($groupB as $team) {
     ];
 }
 
-// -----------------------------------------------------
-// 6) PROCESS GROUP A RESULTS
-// -----------------------------------------------------
+// Group A results
 $groupA_matches = get_matches($groupA); // 6 pairings
 for ($i = 0; $i < count($groupA_matches); $i++) {
     $pair  = $groupA_matches[$i];
@@ -146,9 +144,7 @@ usort($statsA, function($a, $b) {
     return $b['gf'] - $a['gf'];
 });
 
-// -----------------------------------------------------
-// 7) PROCESS GROUP B RESULTS
-// -----------------------------------------------------
+// group B
 $groupB_matches = get_matches($groupB);
 for ($i = 0; $i < count($groupB_matches); $i++) {
     $pair  = $groupB_matches[$i];
@@ -198,9 +194,7 @@ usort($statsB, function($a, $b) {
     return $b['gf'] - $a['gf'];
 });
 
-// -----------------------------------------------------
-// 8) DETERMINE SEMIFINALISTS & FINALISTS
-// -----------------------------------------------------
+// Semifinalists and Finlaist
 $grpA_win   = $statsA[0]['id'];
 $grpA_ru    = $statsA[1]['id'];
 $grpB_win   = $statsB[0]['id'];
@@ -226,9 +220,6 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
               ? $stored['F1'] 
               : null;
 
-// -----------------------------------------------------
-// 9) HTML OUTPUT
-// -----------------------------------------------------
 ?>
 <?php include 'includes/public_header.php'; ?>
 <!DOCTYPE html>
