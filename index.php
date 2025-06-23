@@ -132,7 +132,7 @@ if (count($allTeams) === 8) {
         }
     }
 
-    // Sort each group’s standings by points descending
+    // Sorting out each team's according to points
     usort($statsA, function($a, $b) {
         return $b['points'] - $a['points'];
     });
@@ -151,7 +151,6 @@ if (count($allTeams) === 8) {
   />
   <title>KickTastic</title>
   <style>
-    /* ===== 1. RESET ===== */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -170,7 +169,6 @@ if (count($allTeams) === 8) {
       color: inherit;
     }
 
-    /* ===== 2. TOP BAR ===== */
     .top-bar {
       background-color: #000;
       display: flex;
@@ -203,7 +201,6 @@ if (count($allTeams) === 8) {
       margin-top: -0.75rem;
     }
 
-    /* ===== 3. NAV MENU ===== */
     .menu-bar {
       background-color: #3498db;
       display: flex;
@@ -222,7 +219,6 @@ if (count($allTeams) === 8) {
       border-radius: 4px;
     }
 
-    /* ===== 4. DROPDOWN ===== */
     .dropdown {
       position: relative;
       flex-shrink: 0;
@@ -283,7 +279,6 @@ if (count($allTeams) === 8) {
       color: #3498db;
     }
 
-    /* ===== 5. TEAM LOGO SLIDER ===== */
     .team-slider-container {
       overflow: hidden;
       background: #fff;
@@ -318,7 +313,6 @@ if (count($allTeams) === 8) {
       }
     }
 
-    /* ===== 6. IMAGE SLIDER & CONTAINERS ===== */
     .content-section {
       display: flex;
       justify-content: space-between;
@@ -362,7 +356,6 @@ if (count($allTeams) === 8) {
       right: 8px;
     }
 
-    /* ===== 7. NEWS CONTAINER ===== */
     .news-container {
       width: 40%;
       height: 300px;
@@ -410,7 +403,6 @@ if (count($allTeams) === 8) {
       margin-top: 0.25rem;
     }
 
-    /* ===== 8. SCHEDULE PREVIEW ===== */
     .schedule-section {
       padding: 2rem 1rem;
       background: #000;
@@ -481,7 +473,6 @@ if (count($allTeams) === 8) {
       text-decoration: underline;
     }
 
-    /* ===== 9. STANDINGS PREVIEW WITH COLOR SCHEME ===== */
     .standings-section {
       background: #000;
       border-radius: 20px;
@@ -510,7 +501,7 @@ if (count($allTeams) === 8) {
       overflow: hidden;
     }
     .group-box .group-title {
-      background: #1e88e5; /* Blue header */
+      background: #1e88e5;
       color: #fff;
       padding: 0.75rem;
       font-size: 1.125rem;
@@ -522,7 +513,7 @@ if (count($allTeams) === 8) {
       border-collapse: collapse;
     }
     .standings-table thead tr {
-      background: #000; /* Black header row */
+      background: #000; 
     }
     .standings-table thead th {
       color: #fff;
@@ -560,7 +551,7 @@ if (count($allTeams) === 8) {
       text-decoration: underline;
     }
 
-    /* ===== 10. FOOTER ===== */
+ 
     .site-footer {
       background-color: #000;
       color: #fff;
@@ -611,7 +602,6 @@ if (count($allTeams) === 8) {
       color: #ccc;
     }
 
-    /* ===== 11. PAGE CONTENT ===== */
     .page-content {
       padding: 2rem 1rem;
       text-align: center;
@@ -637,7 +627,6 @@ if (count($allTeams) === 8) {
       background: #c53030;
     }
 
-    /* ===== 12. RESPONSIVE TWEAKS ===== */
     @media (min-width: 768px) {
       .slider-container {
         width: 60%;
@@ -695,18 +684,10 @@ if (count($allTeams) === 8) {
     }
   </style>
 
-  <!-- ===== FONT AWESOME CDN ===== -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    integrity="sha512-dyZtEEryLpVBj+K6wwd7U8pmPr9/zTOuV/CfiE6sJor0L0F7kk8V1fqTJyVq2mZV9yfeHcC5IuUlG97+MURyZA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
 </head>
 <body>
 
-  <!-- ===== TOP BAR ===== -->
+  <!-- Main Top Bar -->
   <header class="top-bar">
     <img src="assets/images/logo.png" alt="KickTastic Logo" class="logo">
 
@@ -738,7 +719,7 @@ if (count($allTeams) === 8) {
     </div>
   </header>
 
-  <!-- ===== NAV MENU ===== -->
+  <!-- Navigation Menu-->
   <nav class="menu-bar">
     <a href="index.php">Home</a>
     <a href="teams.php">Teams</a>
