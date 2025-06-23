@@ -14,7 +14,7 @@ $team = $conn->query("SELECT * FROM teams WHERE user_id = $user_id")->fetch_asso
 $players = $team ? $conn->query("SELECT * FROM players WHERE team_id = {$team['id']}") : null;
 $player_count = $players ? $players->num_rows : 0;
 
-// TEAM CREATION
+// Create Team
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_team'])) {
     $team_name = $_POST['team_name'];
     $college = $_POST['college'];
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_team'])) {
     exit;
 }
 
-// ADD/EDIT PLAYER
+// Add/ Edit Player
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['save_player'])) {
     $player_id = $_POST['player_id'] ?? null;
     $name = $_POST['name'];
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['save_player'])) {
 <head>
   <meta charset="UTF-8">
   <title>Manager Dashboard</title>
-  <link rel="stylesheet" href="../assets/css/main.css"> <!-- reuse your global CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css"> 
   <style>
     body {
       padding: 2rem;
@@ -248,7 +248,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['save_player'])) {
   <?php endif; ?>
 </div>
 
-<!-- OVERLAY + MODALS -->
 <div class="overlay" id="overlay" onclick="closeModals()"></div>
 
 <div class="modal" id="playerModal">
@@ -272,14 +271,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['save_player'])) {
     <form method="POST" enctype="multipart/form-data">
       <input type="text" name="team_name" placeholder="Team Name" required>
       <select name="college" required>
-        <!-- Public Colleges -->
+        
     <option value="Humber College">Humber College</option>
     <option value="Seneca College">Seneca College</option>
     <option value="George Brown College">George Brown College</option>
     <option value="Centennial College">Centennial College</option>
     <option value="Sheridan College">Sheridan College (Toronto campus)</option>
 
-    <!-- Public Universities -->
     <option value="University of Toronto - St. George">University of Toronto - St. George</option>
     <option value="University of Toronto - Scarborough">University of Toronto - Scarborough</option>
     <option value="University of Toronto - Mississauga">University of Toronto - Mississauga</option>
@@ -287,7 +285,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['save_player'])) {
     <option value="Toronto Metropolitan University">Toronto Metropolitan University (formerly Ryerson)</option>
     <option value="OCAD University">OCAD University</option>
 
-    <!-- Private & Specialized Colleges in Toronto -->
     <option value="Toronto Film School">Toronto Film School</option>
     <option value="Toronto School of Management">Toronto School of Management</option>
     <option value="Canadian College of Naturopathic Medicine">Canadian College of Naturopathic Medicine</option>
