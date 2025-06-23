@@ -11,7 +11,7 @@ $user_id = $_SESSION['user_id'];
 $team = $conn->query("SELECT * FROM teams WHERE user_id = $user_id")->fetch_assoc();
 $team_id = $team['id'];
 
-// Count players
+// It count players
 $count_query = $conn->query("SELECT COUNT(*) as total FROM players WHERE team_id = $team_id");
 $player_count = $count_query->fetch_assoc()['total'];
 

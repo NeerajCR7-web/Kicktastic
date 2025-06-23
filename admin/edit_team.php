@@ -1,5 +1,4 @@
 <?php
-// admin/edit_team.php
 session_start();
 require '../includes/db.php';
 
@@ -25,7 +24,7 @@ $stmt->close();
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_name = $_POST['team_name'];
-    $new_logo = $logo_url; // default to existing logo
+    $new_logo = $logo_url;
 
     // Check if a new file is uploaded
     if (isset($_FILES['logo_file']) && $_FILES['logo_file']['error'] === UPLOAD_ERR_OK) {

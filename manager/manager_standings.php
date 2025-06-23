@@ -213,9 +213,6 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
               ? $stored['F1'] 
               : null;
 
-// -----------------------------------------------------
-// 9) HTML OUTPUT
-// -----------------------------------------------------
 ?>
 <?php include '../includes/manager_header.php'; ?>
 <!DOCTYPE html>
@@ -349,7 +346,7 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
                         <td><?= $idx + 1 ?></td>
                         <td class="logo-cell">
                             <?php
-                                // Find that team’s logo_url
+                               
                                 $tid = $row['id'];
                                 echo "<img src='../uploads/{$teams_by_id[$tid]['logo_url']}' alt='logo'>";
                             ?>
@@ -373,7 +370,6 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
         
     </div>
 
-    <!-- ========== GROUP B STANDINGS ========== -->
     <div class="group-container">
         <div class="group-title">Group B Standings</div>
         <table class="standings-table">
@@ -422,12 +418,10 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
        
     </div>
 
-    <!-- ========== KNOCKOUT STAGE DISPLAY ONLY ========== -->
     <div class="knockout-container">
     <div class="knockout-title">Knockout Stage</div>
 
 <?php
-// ✅ 1. Count how many group matches have stored results
 $group_matches_played = 0;
 foreach ($groupA_matches as $i => $match) {
     if (isset($stored["A$i"])) $group_matches_played++;
@@ -438,7 +432,6 @@ foreach ($groupB_matches as $i => $match) {
 ?>
 
 <?php if ($group_matches_played < 12): ?>
-    <!-- ✅ 2. If not all 12 matches played, show this message -->
     <div style="
         max-width: 600px;
         margin: 20px auto;
@@ -456,9 +449,7 @@ foreach ($groupB_matches as $i => $match) {
     </div>
 
 <?php else: ?>
-    <!-- ✅ 3. Else render semifinals & final -->
 
-    <!-- Semifinal 1 -->
     <div class="knockout-box">
         <strong>Semifinal 1:</strong><br>
         <img src="uploads/<?= $sf1_team1['logo_url'] ?>" width="30"> <?= htmlspecialchars($sf1_team1['team_name']) ?>
@@ -475,7 +466,6 @@ foreach ($groupB_matches as $i => $match) {
         <?php endif; ?>
     </div>
 
-    <!-- Semifinal 2 -->
     <div class="knockout-box">
         <strong>Semifinal 2:</strong><br>
         <img src="uploads/<?= $sf2_team1['logo_url'] ?>" width="30"> <?= htmlspecialchars($sf2_team1['team_name']) ?>
@@ -492,7 +482,6 @@ foreach ($groupB_matches as $i => $match) {
         <?php endif; ?>
     </div>
 
-    <!-- Final -->
     <?php if ($final_team1 && $final_team2): ?>
     <div class="knockout-box">
         <strong>Final:</strong><br>
