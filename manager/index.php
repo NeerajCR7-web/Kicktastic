@@ -709,8 +709,7 @@ if (count($allTeams) === 8) {
     </div>
   </header>
 
-  <!-- NAV MENU, LOGO SLIDER, IMAGE SLIDER, NEWS, etc. -->
-    <!-- ===== NAV MENU ===== -->
+
   <nav class="menu-bar">
     <a href="index.php">Home</a>
     <a href="view_teams.php">Teams</a>
@@ -719,8 +718,6 @@ if (count($allTeams) === 8) {
 
   </nav>
 
-  <!-- ===== TEAM LOGO SLIDER ===== -->
- <!-- ===== TEAM LOGO SLIDER ===== -->
 <?php if (count($allTeams) === 8): ?>
   <div class="team-slider-container">
     <div class="team-slider-track animate">
@@ -731,30 +728,24 @@ if (count($allTeams) === 8) {
   </div>
 <?php endif; ?>
 
-  <!-- ===== IMAGE SLIDER & NEWS SECTION ===== -->
+  <!-- Soccer Image Slider -->
   <section class="content-section">
-    <!-- Left: Image slider with prev/next buttons -->
+
     <div class="slider-container" id="sliderContainer">
       <button class="slider-button prev" id="prevBtn">&#8249;</button>
       <img src="<?= htmlspecialchars($soccerImages[0]) ?>" alt="Soccer Image" id="sliderImage">
       <button class="slider-button next" id="nextBtn">&#8250;</button>
     </div>
 
-    <!-- Right: News fetched from NewsAPI.org -->
     <div class="news-container" id="newsContainer">
-      <!-- JavaScript will inject news items here -->
     </div>
   </section>
-  <!-- Copy exactly everything from your public index.php below this header -->
-  <!-- … -->
    <?php if (count($allTeams) === 8): ?>
   <section class="schedule-section">
     <div class="schedule-heading">SCHEDULE</div>
     <div class="schedule-container">
       <?php
-      // Show first 2 matches from Group A and first 2 from Group B (total 4)
       for ($i = 0; $i < 2; $i++) {
-          // Group A match
           $matchA = $groupA_matches[$i];
           $dateA = (new DateTime('2025-08-01'))->modify("+{$i} days")->format('F j, Y');
       ?>
@@ -773,7 +764,6 @@ if (count($allTeams) === 8) {
             <div class="match-date"><?= $dateA ?></div>
           </div>
       <?php
-          // Group B match
           $matchB = $groupB_matches[$i];
           $dateB = (new DateTime('2025-08-01'))->modify("+{$i} days")->format('F j, Y');
       ?>
@@ -798,7 +788,7 @@ if (count($allTeams) === 8) {
   </section>
   <?php endif; ?>
 
-  <!-- ===== SCHEDULE PREVIEW ===== -->
+  <!-- Match Schedule-->
 <section class="schedule-section">
   <div class="schedule-heading">Upcoming Matches</div>
   <div class="schedule-container">
@@ -842,7 +832,6 @@ if (count($allTeams) === 8) {
   </div>
 </section>
 
-<!-- ===== STANDINGS PREVIEW ===== -->
 <section class="standings-section">
   <div class="standings-heading">Live Group Standings</div>
   <?php if (!empty($statsA) && !empty($statsB)): ?>
@@ -890,7 +879,6 @@ if (count($allTeams) === 8) {
 
   
 
-  <!-- ===== FOOTER ===== -->
  <footer class="site-footer">
   <div class="footer-follow">
     <span class="follow-text">Follow Us On</span>
@@ -923,7 +911,6 @@ if (count($allTeams) === 8) {
 
 
   <script>
-    // user‐menu toggle
     document.getElementById('userBtn').addEventListener('click', e => {
       e.stopPropagation();
       document.getElementById('userMenu').classList.toggle('show');
@@ -931,8 +918,6 @@ if (count($allTeams) === 8) {
     document.addEventListener('click', () => {
       document.getElementById('userMenu').classList.remove('show');
     });
-    // and your existing sliders/news scripts…
-    // Image slider functionality
     (function() {
       var images = <?php echo json_encode($soccerImages); ?>;
       var currentIndex = 0;
@@ -955,7 +940,6 @@ if (count($allTeams) === 8) {
       });
     })();
 
-    // Fetch and display news from NewsAPI.org
     (function() {
       var apiKey = '3a24bbdfb9a546f2bac0a19d0671104c';
       var query = encodeURIComponent('UEFA OR "nations league" OR "la liga" OR "league 1" OR bundesliga OR "FIFA world cup"');

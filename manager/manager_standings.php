@@ -1,9 +1,6 @@
 <?php
 require '../includes/db.php';
 
-// -----------------------------------------------------
-// 1) FETCH TEAMS & ENSURE EXACTLY 8
-// -----------------------------------------------------
 $teams_result = $conn->query("SELECT id, team_name, logo_url FROM teams ORDER BY id ASC");
 $all_teams = [];
 while ($row = $teams_result->fetch_assoc()) {
@@ -35,30 +32,20 @@ if (count($all_teams) !== 8) {
     exit;
 }
 
-// Build lookup by ID
 $teams_by_id = [];
 foreach ($all_teams as $t) {
     $teams_by_id[$t['id']] = $t;
 }
 
-// -----------------------------------------------------
-// 2) FETCH ALL match_results INTO $stored[match_key]
-// -----------------------------------------------------
 $stored = [];
 $res = $conn->query("SELECT * FROM match_results");
 while ($r = $res->fetch_assoc()) {
     $stored[$r['match_key']] = $r;
 }
 
-// -----------------------------------------------------
-// 3) GROUP A & GROUP B SPLIT
-// -----------------------------------------------------
 $groupA = array_slice($all_teams, 0, 4);
 $groupB = array_slice($all_teams, 4, 4);
 
-// -----------------------------------------------------
-// 4) HELPER: generate 6 pairings for 4 teams
-// -----------------------------------------------------
 function get_matches(array $group) {
     $pairs = [];
     for ($i = 0; $i < count($group); $i++) {
@@ -72,9 +59,6 @@ function get_matches(array $group) {
     return $pairs;
 } 
 
-// -----------------------------------------------------
-// 5) INITIALIZE STAT ARRAYS
-// -----------------------------------------------------
 $statsA = [];
 foreach ($groupA as $team) {
     $statsA[$team['id']] = [
@@ -87,7 +71,7 @@ foreach ($groupA as $team) {
         'gf'      => 0,
         'ga'      => 0,
         'points'  => 0,
-        'form'    => []  // chronological 'W','D','L'
+        'form'    => []  
     ];
 }
 $statsB = [];
@@ -106,9 +90,6 @@ foreach ($groupB as $team) {
     ];
 }
 
-// -----------------------------------------------------
-// 6) PROCESS GROUP A RESULTS
-// -----------------------------------------------------
 $groupA_matches = get_matches($groupA); // 6 pairings
 for ($i = 0; $i < count($groupA_matches); $i++) {
     $pair  = $groupA_matches[$i];
@@ -158,9 +139,6 @@ usort($statsA, function($a, $b) {
     return $b['gf'] - $a['gf'];
 });
 
-// -----------------------------------------------------
-// 7) PROCESS GROUP B RESULTS
-// -----------------------------------------------------
 $groupB_matches = get_matches($groupB);
 for ($i = 0; $i < count($groupB_matches); $i++) {
     $pair  = $groupB_matches[$i];
@@ -210,9 +188,6 @@ usort($statsB, function($a, $b) {
     return $b['gf'] - $a['gf'];
 });
 
-// -----------------------------------------------------
-// 8) DETERMINE SEMIFINALISTS & FINALISTS
-// -----------------------------------------------------
 $grpA_win   = $statsA[0]['id'];
 $grpA_ru    = $statsA[1]['id'];
 $grpB_win   = $statsB[0]['id'];

@@ -1,10 +1,6 @@
 <?php
-// public_schedule.php
 require '../includes/db.php';
 
-// -----------------------------------------------------
-// 1) FETCH ALL TEAMS (ordered by id ASC to match schedule.php)
-// -----------------------------------------------------
 $teams_result = $conn->query("SELECT id, team_name, logo_url FROM teams ORDER BY id ASC");
 $all_teams = [];
 while ($row = $teams_result->fetch_assoc()) {
@@ -39,30 +35,20 @@ if ($team_count !== 8) {
 }
 
 
-// Build a lookup array by team ID
 $teams_by_id = [];
 foreach ($all_teams as $t) {
     $teams_by_id[$t['id']] = $t;
 }
 
-// -----------------------------------------------------
-// 2) FETCH ALL SAVED match_results INTO $stored[key]
-// -----------------------------------------------------
 $stored = [];
 $res = $conn->query("SELECT * FROM match_results");
 while ($r = $res->fetch_assoc()) {
     $stored[$r['match_key']] = $r;
 }
 
-// -----------------------------------------------------
-// 3) SPLIT INTO GROUP A & GROUP B (first 4 vs next 4)
-// -----------------------------------------------------
 $groupA = array_slice($all_teams, 0, 4);
 $groupB = array_slice($all_teams, 4, 4);
 
-// -----------------------------------------------------
-// 4) HELPER: generate 6 round-robin pairings for a group of 4
-// -----------------------------------------------------
 function get_matches(array $group) {
     $pairs = [];
     for ($i = 0; $i < count($group); $i++) {
@@ -76,9 +62,6 @@ function get_matches(array $group) {
     return $pairs; // 6 pairings in total
 }
 
-// -----------------------------------------------------
-// 5) COMPUTE STANDINGS FOR EACH GROUP (to seed semifinals)
-// -----------------------------------------------------
 $statsA = [];
 foreach ($groupA as $team) {
     $statsA[$team['id']] = [
@@ -91,7 +74,7 @@ foreach ($groupA as $team) {
         'gf'      => 0,
         'ga'      => 0,
         'points'  => 0,
-        'form'    => []  // chronological 'W','D','L'
+        'form'    => []  
     ];
 }
 $statsB = [];
@@ -111,9 +94,8 @@ foreach ($groupB as $team) {
 }
 
 $groupA_matches = get_matches($groupA); // 6 pairings
-$groupB_matches = get_matches($groupB); // 6 pairings
+$groupB_matches = get_matches($groupB); 
 
-// Process Group A results
 for ($i = 0; $i < count($groupA_matches); $i++) {
     $pair = $groupA_matches[$i];
     $t1   = $pair['team1'];
@@ -166,7 +148,6 @@ usort($statsA, function($a, $b) {
     return $b['gf'] - $a['gf'];
 });
 
-// Process Group B results
 for ($i = 0; $i < count($groupB_matches); $i++) {
     $pair = $groupB_matches[$i];
     $t1   = $pair['team1'];
@@ -219,9 +200,6 @@ usort($statsB, function($a, $b) {
     return $b['gf'] - $a['gf'];
 });
 
-// -----------------------------------------------------
-// 6) DETERMINE SEMIFINALISTS (TOP 2 in each group)
-// -----------------------------------------------------
 $groupA_winner   = $statsA[0]['id'];
 $groupA_runnerup = $statsA[1]['id'];
 $groupB_winner   = $statsB[0]['id'];
@@ -235,7 +213,6 @@ $sf2_team2 = $teams_by_id[$groupA_runnerup];
 $sf1_res = isset($stored['SF1']) ? $stored['SF1'] : null;
 $sf2_res = isset($stored['SF2']) ? $stored['SF2'] : null;
 
-// If both semis have been played, determine finalists:
 $final_team1 = null;
 $final_team2 = null;
 if ($sf1_res && $sf2_res) {
@@ -254,9 +231,6 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
               ? $stored['F1'] 
               : null;
 
-// -----------------------------------------------------
-// 7) HTML OUTPUT BEGINS
-// -----------------------------------------------------
 ?>
 <?php include '../includes/manager_header.php'; ?>
 <!DOCTYPE html>
@@ -308,7 +282,6 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
 </head>
 <body>
 
-    <!-- ========== GROUP STAGE TABLES ========== -->
     <h2>Group Stage</h2>
     <div class="group-table">
         <h3>Group A</h3>
@@ -326,14 +299,12 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
         </table>
 
         <?php
-        // List out each of the 6 matches for Group A in order
         for ($i = 0; $i < count($groupA_matches); $i++) {
             $match = $groupA_matches[$i];
             $t1    = $match['team1'];
             $t2    = $match['team2'];
             $key   = "A" . $i;
 
-            // Date logic: same as schedule.php: "+ $i days"
             $date = new DateTime('2025-08-01');
             $date->modify("+" . $i . " days");
             $dt   = $date->format('l, F j, Y') . " at 17:00";
@@ -376,7 +347,6 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
         </table>
 
         <?php
-        // List out each of the 6 matches for Group B
         for ($i = 0; $i < count($groupB_matches); $i++) {
             $match = $groupB_matches[$i];
             $t1    = $match['team1'];
@@ -411,7 +381,6 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
 
     <div style="clear: both;"></div>
 
-    <!-- ========== KNOCKOUT STAGE ========== -->
     <h2>Knockout Stage</h2>
     <?php
 $group_matches_played = 0;
@@ -441,7 +410,6 @@ foreach ($groupB_matches as $i => $match) {
 </div>
 
 <?php else: ?>
-    <!-- Semifinal 1 -->
     <?php
     $sf1_key = "SF1";
     $sf1_date = new DateTime('2025-08-07');
@@ -462,7 +430,6 @@ foreach ($groupB_matches as $i => $match) {
     echo "</div>\n";
     ?>
 
-    <!-- Semifinal 2 -->
     <?php
     $sf2_key = "SF2";
     $sf2_date = new DateTime('2025-08-07');
@@ -483,7 +450,6 @@ foreach ($groupB_matches as $i => $match) {
     echo "</div>\n";
     ?>
 
-    <!-- Final -->
     <?php if ($final_team1 && $final_team2): 
         $f_key = "F1";
         $f_date = new DateTime('2025-08-08');
