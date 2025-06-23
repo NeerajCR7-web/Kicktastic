@@ -18,6 +18,7 @@ function getRoundRobinMatches(array $fourTeams) {
     }
     return $pairs;
 }
+
 function getAllResults(PDO $pdo) {
     $stmt = $pdo->query("SELECT * FROM match_results");
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,14 +35,13 @@ function computeGroupStandings(PDO $pdo) {
         return [[], []]; // Return empty if not 8 teams
     }
 
-    
     $groupA = array_slice($allTeams, 0, 4);
     $groupB = array_slice($allTeams, 4, 4);
     $matchesA = getRoundRobinMatches($groupA);
     $matchesB = getRoundRobinMatches($groupB);
     $allResults = getAllResults($pdo);
 
-     $statsA = [];
+    $statsA = [];
     foreach ($groupA as $t) {
         $statsA[$t['id']] = [
             'id' => $t['id'],
@@ -50,8 +50,7 @@ function computeGroupStandings(PDO $pdo) {
             'gf' => 0, 'ga' => 0, 'points' => 0, 'form' => []
         ];
     }
-
-$statsB = [];
+    $statsB = [];
     foreach ($groupB as $t) {
         $statsB[$t['id']] = [
             'id' => $t['id'],
@@ -61,11 +60,12 @@ $statsB = [];
         ];
     }
 
-      // Tally A & B - code continues same (truncated for brevity)...
+    // Tally A & B - code continues same (truncated for brevity)...
     // [Keep your tally logic unchanged here]
 
     return [$statsA, $statsB];
 }
+
 function getSemifinalists(PDO $pdo) {
     list($statsA, $statsB) = computeGroupStandings($pdo);
     if (count($statsA) < 2 || count($statsB) < 2) return [];
@@ -74,12 +74,12 @@ function getSemifinalists(PDO $pdo) {
     $sf2 = ['team1' => $statsB[0]['id'], 'team2' => $statsA[1]['id']];
     return [$sf1, $sf2];
 }
+
 function getFinalists(PDO $pdo) {
     $allResults = getAllResults($pdo);
     if (!isset($allResults['SF1']) || !isset($allResults['SF2'])) {
         return null;
     }
-
     list($sf1Match, $sf2Match) = getSemifinalists($pdo);
     $sf1_t1 = $sf1Match['team1'];
     $sf1_t2 = $sf1Match['team2'];
@@ -90,6 +90,7 @@ function getFinalists(PDO $pdo) {
     $winner2 = (intval($allResults['SF2']['score1']) > intval($allResults['SF2']['score2'])) ? $sf2_t1 : $sf2_t2;
     return [$winner1, $winner2];
 }
+
 function renderMatchBox(string $matchKey, array $team1, array $team2, string $dateTime, array $allResults, bool $isEditable) {
     $ds1 = isset($allResults[$matchKey]) ? intval($allResults[$matchKey]['score1']) : '';
     $ds2 = isset($allResults[$matchKey]) ? intval($allResults[$matchKey]['score2']) : '';
@@ -119,7 +120,7 @@ function renderMatchBox(string $matchKey, array $team1, array $team2, string $da
         echo "  <strong>Score:</strong> {$allResults[$matchKey]['score1']} - {$allResults[$matchKey]['score2']}<br>\n";
         echo "  <strong>MOTM:</strong> {$allResults[$matchKey]['motm']}<br>\n";
         echo "  <a href='{$allResults[$matchKey]['highlight_url']}' target='_blank'>Watch Highlights</a>\n";
-        } else {
+    } else {
         echo "  <em>Not Played Yet</em>\n";
     }
     echo "</div>\n";

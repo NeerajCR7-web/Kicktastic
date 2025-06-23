@@ -47,7 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             width: 400px;
         }
-         .register-box h2 {
+
+        .register-box h2 {
             text-align: center;
             margin-bottom: 25px;
             color: #333;
@@ -69,7 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 8px;
             box-sizing: border-box;
         }
-          .register-box input[type="submit"] {
+
+        .register-box input[type="submit"] {
             width: 100%;
             padding: 12px;
             background-color: #007bff;
@@ -80,7 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             cursor: pointer;
             margin-top: 20px;
         }
- .register-box input[type="submit"]:hover {
+
+        .register-box input[type="submit"]:hover {
             background-color: #0056b3;
         }
 
@@ -97,7 +100,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-weight: 600;
             margin-bottom: 15px;
         }
-         .register-box a {
+
+        .register-box a {
             color: #007bff;
             text-decoration: none;
         }
@@ -107,3 +111,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </style>
 </head>
+<body>
+
+<div class="register-box">
+    <h2>Register as Manager</h2>
+
+    <?php if (!empty($error)): ?>
+        <div class="error"><?= $error ?></div>
+    <?php elseif (!empty($success)): ?>
+        <div class="success"><?= $success ?></div>
+    <?php endif; ?>
+
+    <form method="POST" onsubmit="return validateEmails()">
+        <label for="fname">First Name:</label>
+        <input type="text" name="fname" id="fname" required>
+
+        <label for="lname">Last Name:</label>
+        <input type="text" name="lname" id="lname" required>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+
+        <label for="confirm_email">Confirm Email:</label>
+        <input type="email" name="confirm_email" id="confirm_email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+
+        <input type="submit" value="Register">
+    </form>
+</div>
+
+<script>
+    function validateEmails() {
+        const email = document.getElementById("email").value;
+        const confirm = document.getElementById("confirm_email").value;
+        if (email !== confirm) {
+            alert("Emails do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>
