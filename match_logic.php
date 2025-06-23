@@ -6,7 +6,7 @@ function getAllTeams(PDO $pdo) {
 }
 
 // Generate  matchups for 4 teams 
-function getRoundRobinMatches(array $fourTeams) {
+function getRoundRobinMatches(array $fourTeams) { //https://stackoverflow.com/questions/19993195/group-pairs-in-array
     $pairs = [];
     for ($i = 0; $i < 4; $i++) {
         for ($j = $i + 1; $j < 4; $j++) {
@@ -73,7 +73,7 @@ function computeGroupStandings(PDO $pdo) {
     return [$statsA, $statsB];
 }
 
-// FOr knockout stages
+// For knockout stages
 function getSemifinalists(PDO $pdo) {
     list($statsA, $statsB) = computeGroupStandings($pdo);
     if (count($statsA) < 2 || count($statsB) < 2) return [];
@@ -83,6 +83,8 @@ function getSemifinalists(PDO $pdo) {
     return [$sf1, $sf2];
 }
 
+
+// Winners after semifinals 
 function getFinalists(PDO $pdo) {
     $allResults = getAllResults($pdo);
     if (!isset($allResults['SF1']) || !isset($allResults['SF2'])) {
