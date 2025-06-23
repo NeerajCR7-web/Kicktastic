@@ -727,8 +727,7 @@ if (count($allTeams) === 8) {
     <a href="standings.php">Standings</a>
   </nav>
 
-  <!-- ===== TEAM LOGO SLIDER ===== -->
-  <!-- ===== TEAM LOGO SLIDER ===== -->
+  <!--Logo Slider-->
 <?php if (count($allTeams) === 8): ?>
   <div class="team-slider-container">
     <div class="team-slider-track animate">
@@ -741,9 +740,8 @@ if (count($allTeams) === 8) {
 
 
 
-  <!-- ===== IMAGE SLIDER & NEWS SECTION ===== -->
+  <!-- Image container -->
   <section class="content-section">
-    <!-- Left: Image slider with prev/next buttons -->
     <div class="slider-container" id="sliderContainer">
       <button class="slider-button prev" id="prevBtn">&#8249;</button>
       <img src="<?= htmlspecialchars($soccerImages[0]) ?>" alt="Soccer Image" id="sliderImage">
@@ -754,7 +752,7 @@ if (count($allTeams) === 8) {
     </div>
   </section>
 
-  <!-- ===== SCHEDULE PREVIEW ===== -->
+  <!-- Match Schedule-->
   <section class="schedule-section">
   <div class="schedule-heading">Upcoming Matches</div>
   <div class="schedule-container">
@@ -798,7 +796,7 @@ if (count($allTeams) === 8) {
   </div>
 </section>
 
-  <!-- ===== STANDINGS PREVIEW ===== -->
+  <!-- Standings Showcase-->
  <section class="standings-section">
   <div class="standings-heading">Live Group Standings</div>
   <?php if (!empty($statsA) && !empty($statsB)): ?>
@@ -846,7 +844,7 @@ if (count($allTeams) === 8) {
 
   
 
-  <!-- ===== FOOTER ===== -->
+  <!-- Footer-->
   <footer class="site-footer">
   <div class="footer-follow">
     <span class="follow-text">Follow Us On</span>
@@ -879,7 +877,6 @@ if (count($allTeams) === 8) {
   </footer>
 
   <script>
-    // Toggle dropdown on button click
     document.getElementById('loginBtn').addEventListener('click', function(event) {
       event.stopPropagation();
       document.getElementById('dropdownMenu').classList.toggle('show');

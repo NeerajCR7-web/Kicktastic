@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Access denied for this role.");
         }
         $_SESSION['user_id']   = $user['id'];
-        $_SESSION['user_name'] = $user['name'];    // ← store the display name
+        $_SESSION['user_name'] = $user['name'];    // stores the name who logged in
         $_SESSION['role']      = $user['role'];
         if ($user['role'] == 'league_admin') {
             header("Location: admin/index.php");
