@@ -29,14 +29,13 @@ $soccerImages = [ // Image Slider
 
 ];
 
-// ----- Build group-stage matches for schedule preview -----
 $allTeams = [];
 $allTeamsResult = $conn->query("SELECT id, team_name, logo_url FROM teams ORDER BY id ASC");
 while ($row = $allTeamsResult->fetch_assoc()) {
     $allTeams[] = $row;
 }
 
-// Ensure exactly 8 teams
+// Ensuring only 8 teams are there
 if (count($allTeams) === 8) {
     shuffle($allTeams);
     $groupA = array_slice($allTeams, 0, 4);
@@ -58,7 +57,7 @@ if (count($allTeams) === 8) {
     $groupA_matches = getMatches($groupA); // 6 matches
     $groupB_matches = getMatches($groupB); // 6 matches
 
-    // ----- Compute Standings for Group A & Group B -----
+    //  Standings for Group A 
     $statsA = [];
     foreach ($groupA as $team) {
         $statsA[$team['id']] = [
@@ -68,6 +67,7 @@ if (count($allTeams) === 8) {
             'points'    => 0
         ];
     }
+      //  Standings for Group A 
     $statsB = [];
     foreach ($groupB as $team) {
         $statsB[$team['id']] = [
@@ -78,7 +78,6 @@ if (count($allTeams) === 8) {
         ];
     }
 
-    // Build name→ID lookup for group teams
     $nameToIdA = [];
     foreach ($groupA as $t) {
         $nameToIdA[$t['team_name']] = $t['id'];
@@ -88,14 +87,14 @@ if (count($allTeams) === 8) {
         $nameToIdB[$t['team_name']] = $t['id'];
     }
 
-    // Fetch all saved match results
+    // Fetching all saved match results
     $res = $conn->query("SELECT match_key, score1, score2 FROM match_results");
     while ($row = $res->fetch_assoc()) {
         $key = $row['match_key'];
         $s1  = intval($row['score1']);
         $s2  = intval($row['score2']);
 
-        // Group A matches: key starts with "A"
+        // Group A matches
         if (strpos($key, 'A') === 0) {
             $idx = intval(substr($key, 1));
             if (isset($groupA_matches[$idx])) {
@@ -113,7 +112,7 @@ if (count($allTeams) === 8) {
                 }
             }
         }
-        // Group B matches: key starts with "B"
+        // Group B 
         elseif (strpos($key, 'B') === 0) {
             $idx = intval(substr($key, 1));
             if (isset($groupB_matches[$idx])) {
