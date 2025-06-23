@@ -18,7 +18,6 @@ if (count($allTeams) !== 8) {
     exit;
 }
 
-// (Place your match generation logic here...)
 
 header("Location: schedule.php?success=1");
 exit;

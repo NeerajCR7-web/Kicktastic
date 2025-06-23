@@ -3,7 +3,7 @@ require 'includes/db.php';
 
 $name = "Admin User";
 $email = "myadmin@example.com";
-$password = password_hash("admin123", PASSWORD_DEFAULT); // create hash
+$password = password_hash("admin123", PASSWORD_DEFAULT); 
 $role = "league_admin";
 
 $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");

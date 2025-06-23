@@ -27,7 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $logo_path = $logo_name;
         }
     }
-     $stmt = $conn->prepare("UPDATE teams SET team_name = ?, college = ?, logo_url = ? WHERE user_id = ?");
+
+    $stmt = $conn->prepare("UPDATE teams SET team_name = ?, college = ?, logo_url = ? WHERE user_id = ?");
     $stmt->bind_param("sssi", $team_name, $college, $logo_path, $user_id);
     $stmt->execute();
 
@@ -53,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "Sheridan College",
             "Toronto Metropolitan University"
         ];
-         foreach ($colleges as $college) {
+        foreach ($colleges as $college) {
             $selected = ($college === $team['college']) ? 'selected' : '';
             echo "<option value=\"$college\" $selected>$college</option>";
         }

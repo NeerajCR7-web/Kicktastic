@@ -1,8 +1,6 @@
 <?php
-// Include database connection to fetch registered teams and prepare schedule
 require 'includes/db.php';
 
-// ----- Fetch registered teams (for logo slider) -----
 $teamLogos = [];
 $teamsResult = $conn->query("SELECT id, team_name, logo_url FROM teams ORDER BY id ASC");
 $allTeamsById = [];
@@ -13,11 +11,9 @@ while ($row = $teamsResult->fetch_assoc()) {
         'logo_url'  => $row['logo_url']
     ];
 }
-// Duplicate logos for seamless scrolling
 $duplicatedLogos = array_merge($teamLogos, $teamLogos);
 
-// ----- Define soccer-related images for the left slider -----
-$soccerImages = [
+$soccerImages = [ // Image Slider
     'assets/images/1.png',
     'assets/images/2.jpg',
     'assets/images/3.jpg',

@@ -6,24 +6,28 @@ if (!isset($_SESSION['role'])) {
     header("Location: ../login.php");
     exit;
 }
+
 $is_admin = $_SESSION['role'] === 'admin';
 $is_manager = $_SESSION['role'] === 'team_manager';
+
+
 
 // Fetch all teams
 $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams 
                        JOIN users ON teams.user_id = users.id");
-?>
+                       
 
+?>
+<?php include '../includes/manager_header.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>All Registered Teams</title>
     <style>
-         body {
+        body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #f4f6f9;
             margin: 0;
-            padding: 20px;
         }
 
         h2 {
@@ -32,20 +36,23 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
             text-align: center;
             margin-bottom: 30px;
             color: #333;
+            margin-top: 30px
         }
+
         .team-card {
-          background: #fff;
+            background: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin: 15px;
+            margin: 50px;
             width: 300px;
             display: inline-block;
             vertical-align: top;
             text-align: center;
             transition: transform 0.2s ease;
         }
-          .team-card:hover {
+
+        .team-card:hover {
             transform: translateY(-5px);
         }
 
@@ -57,7 +64,8 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
             border: 1px solid #ccc;
             border-radius: 8px;
         }
-         .btn {
+
+        .btn {
             padding: 10px 16px;
             background: #007bff;
             color: white;
@@ -72,6 +80,7 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
         .btn:hover {
             background: #0056b3;
         }
+
         a.back-link {
             display: block;
             text-align: center;
@@ -84,7 +93,7 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
         a.back-link:hover {
             text-decoration: underline;
         }
-        </style>
+    </style>
 </head>
 <body>
 
@@ -95,18 +104,17 @@ $teams = $conn->query("SELECT teams.*, users.name as manager_name FROM teams
         <h3><?= htmlspecialchars($team['team_name']) ?></h3>
         <p><strong>Manager:</strong> <?= htmlspecialchars($team['manager_name']) ?></p>
         <p><strong>College:</strong> <?= htmlspecialchars($team['college']) ?></p>
-          <?php if (!empty($team['logo_url'])): ?>
+        <?php if (!empty($team['logo_url'])): ?>
             <img src="../uploads/<?= $team['logo_url'] ?>" class="logo"><br><br>
         <?php endif; ?>
 
         <?php if ($is_admin || $is_manager): ?>
             <a href="view_players.php?team_id=<?= $team['id'] ?>" class="btn">View Players</a>
-            <?php endif; ?>
+        <?php endif; ?>
     </div>
-    <?php endwhile; ?>
+<?php endwhile; ?>
 
-<br><br>
-<a href="dashboard.php">Back to Dashboard</a>
 
 </body>
 </html>
+<?php include '../includes/manager_footer.php'; ?>
