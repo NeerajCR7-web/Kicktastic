@@ -2,13 +2,13 @@
 session_start();
 require '../includes/db.php';
 
-// only allow team managers
+// When user signs in as manager
 if (empty($_SESSION['user_id']) || $_SESSION['role'] !== 'team_manager') {
     header('Location: /index.php');
     exit;
 }
 
-// fetch the same data as public index
+// Fetch from main homepage
 $teamLogos = [];
 $all_teams = [];
 $teamsResult = $conn->query("SELECT id, team_name, logo_url FROM teams ORDER BY id ASC");
@@ -32,14 +32,14 @@ $soccerImages = ['../assets/images/1.png',
     '../assets/images/14.jpg',
     '../assets/images/15.jpg'];
 
-// ----- Build group-stage matches for schedule preview -----
+// Group stage match for schedule 
 $allTeams = [];
 $allTeamsResult = $conn->query("SELECT id, team_name, logo_url FROM teams ORDER BY id ASC");
 while ($row = $allTeamsResult->fetch_assoc()) {
     $allTeams[] = $row;
 }
 
-// Ensure exactly 8 teams
+// make sure only 8 teams are there
 if (count($allTeams) === 8) {
     shuffle($allTeams);
     $groupA = array_slice($allTeams, 0, 4);
@@ -61,7 +61,7 @@ if (count($allTeams) === 8) {
     $groupA_matches = getMatches($groupA); // 6 matches
     $groupB_matches = getMatches($groupB); // 6 matches
 
-    // ----- Compute Standings for Group A & Group B -----
+    // Generate standings 
     $statsA = [];
     foreach ($groupA as $team) {
         $statsA[$team['id']] = [
@@ -81,7 +81,6 @@ if (count($allTeams) === 8) {
         ];
     }
 
-    // Build name→ID lookup for group teams
     $nameToIdA = [];
     foreach ($groupA as $t) {
         $nameToIdA[$t['team_name']] = $t['id'];
@@ -98,7 +97,7 @@ if (count($allTeams) === 8) {
         $s1  = intval($row['score1']);
         $s2  = intval($row['score2']);
 
-        // Group A matches: key starts with "A"
+        // Group A 
         if (strpos($key, 'A') === 0) {
             $idx = intval(substr($key, 1));
             if (isset($groupA_matches[$idx])) {
@@ -116,7 +115,7 @@ if (count($allTeams) === 8) {
                 }
             }
         }
-        // Group B matches: key starts with "B"
+        // Group B matches
         elseif (strpos($key, 'B') === 0) {
             $idx = intval(substr($key, 1));
             if (isset($groupB_matches[$idx])) {
