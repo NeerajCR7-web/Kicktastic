@@ -30,11 +30,11 @@ function getPlayersByTeam($conn, $team_id) {
             flex-wrap: wrap;
             justify-content: center;
             align-items: flex-start;
-            padding: 10px;/* Ensures each card grows independently */
+            padding: 10px;
         }
 
         .team-card {
-            align-self: flex-start; /* Prevent height syncing in flex row */
+            align-self: flex-start; 
             background: #fff;
             border-radius: 16px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -73,7 +73,7 @@ function getPlayersByTeam($conn, $team_id) {
         }
 
         .players-section.expanded {
-            max-height: 1000px; /* Adjust depending on expected player count */
+            max-height: 1000px; 
         }
 
         .player-card {

@@ -326,7 +326,7 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
 
     <h1>GROUP STANDINGS</h1>
 
-    <!-- ========== GROUP A STANDINGS ========== -->
+    <!-- Group A  -->
     <div class="group-container">
         <div class="group-title">Group A Standings</div>
         <table class="standings-table">
@@ -352,7 +352,7 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
                         <td><?= $idx + 1 ?></td>
                         <td class="logo-cell">
                             <?php
-                                // Find that team’s logo_url
+                                // team's logo
                                 $tid = $row['id'];
                                 echo "<img src='uploads/{$teams_by_id[$tid]['logo_url']}' alt='logo'>";
                             ?>
@@ -376,7 +376,7 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
         
     </div>
 
-    <!-- ========== GROUP B STANDINGS ========== -->
+    <!-- Group B -->
     <div class="group-container">
         <div class="group-title">Group B Standings</div>
         <table class="standings-table">
@@ -425,12 +425,11 @@ $final_res = ($final_team1 && $final_team2 && isset($stored['F1']))
        
     </div>
 
-    <!-- ========== KNOCKOUT STAGE DISPLAY ONLY ========== -->
+    <!--Knockout Stage -->
    <div class="knockout-container">
     <div class="knockout-title">Knockout Stage</div>
 
 <?php
-// ✅ 1. Count how many group matches have stored results
 $group_matches_played = 0;
 foreach ($groupA_matches as $i => $match) {
     if (isset($stored["A$i"])) $group_matches_played++;
@@ -441,7 +440,7 @@ foreach ($groupB_matches as $i => $match) {
 ?>
 
 <?php if ($group_matches_played < 12): ?>
-    <!-- ✅ 2. If not all 12 matches played, show this message -->
+    <!-- Message if all 12 matches are not completed-->
     <div style="
         max-width: 600px;
         margin: 20px auto;
@@ -459,7 +458,7 @@ foreach ($groupB_matches as $i => $match) {
     </div>
 
 <?php else: ?>
-    <!-- ✅ 3. Else render semifinals & final -->
+    <!-- If done, show knockout stages-->
 
     <!-- Semifinal 1 -->
     <div class="knockout-box">
