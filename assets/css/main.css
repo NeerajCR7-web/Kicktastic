@@ -1,6 +1,4 @@
-/* public/assets/css/main.css */
 
-/* ===== 1. RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body {
   width: 100%;
@@ -13,11 +11,11 @@ html, body {
 body { background: #f9f9f9; }
 a { text-decoration: none; color: inherit; }
 
-/* ===== 2. TOP BAR ===== */
+/* Top Bar */
 .top-bar {
-  position: relative;      /* ensure full-width positioning */
-  left: 0; right: 0;       /* span edge-to-edge */
-  width: 100vw;            /* viewport width */
+  position: relative;      
+  left: 0; right: 0;      
+  width: 100vw;           
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 
@@ -52,7 +50,7 @@ a { text-decoration: none; color: inherit; }
   margin-top: -0.75rem;
 }
 
-/* ===== 3. NAV MENU ===== */
+/* Navigation Menu */
 .menu-bar {
   position: relative;
   left: 0; right: 0;
@@ -78,7 +76,7 @@ a { text-decoration: none; color: inherit; }
   border-radius: 4px;
 }
 
-/* ===== 4. USER DROPDOWN ===== */
+/* User Dropdown Menu */
 .user-menu, .dropdown { position: relative; flex-shrink: 0; }
 .dropdown-button, .user-button {
   padding: 0.5rem 1rem;
@@ -114,7 +112,7 @@ a { text-decoration: none; color: inherit; }
   background: rgba(0,0,0,0.1);
 }
 
-/* ===== 5. SIGNIN BOXES ===== */
+/* Signin Button */
 .signin-container {
   display: flex;
   gap: 0.5rem;
@@ -137,7 +135,7 @@ a { text-decoration: none; color: inherit; }
 }
 .register-link:hover { color: #3498db; }
 
-/* ===== 6. TEAM LOGO SLIDER ===== */
+/* Team logo slider */
 .team-slider-container { overflow: hidden; background: #fff; padding: 1rem 0; }
 .team-slider-track {
   display: flex;
@@ -156,7 +154,6 @@ a { text-decoration: none; color: inherit; }
   100% { transform: translateX(-50%); }
 }
 
-/* ===== 7. IMAGE SLIDER & NEWS ===== */
 .content-section {
   display: flex;
   justify-content: space-between;
@@ -165,17 +162,11 @@ a { text-decoration: none; color: inherit; }
   background: #fefefe;
   flex-wrap: wrap;
 }
-/* … (your existing slider & news styles go here unchanged) … */
 
-/* ===== 8. SCHEDULE PREVIEW ===== */
-/* … (your existing schedule styles) … */
 
-/* ===== 9. STANDINGS PREVIEW ===== */
-/* … (your existing standings styles) … */
-
-/* ===== 10. FOOTER ===== */
+/* Footer */
 .site-footer {
-  position: relative;    /* edge-to-edge like the header */
+  position: relative;   
   left: 0; right: 0;
   width: 100vw;
   margin-left: calc(50% - 50vw);
@@ -209,8 +200,6 @@ a { text-decoration: none; color: inherit; }
 .footer-legal .copyright  { font-weight: bold; font-size: xx-small; }
 .footer-legal .trademark  { font-size: 0.8rem; color: #ccc; }
 
-/* ===== 11. RESPONSIVE TWEAKS ===== */
 @media (min-width: 640px) {
   .team-slider-track img { width: 80px; height: 80px; }
 }
-/* … (any other media queries you already have) … */

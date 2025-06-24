@@ -1,5 +1,4 @@
 <?php
-// admin/managers.php
 session_start();
 require '../includes/db.php';
 
@@ -8,7 +7,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'league_admin') {
     exit;
 }
 
-// Get all users who are team managers
 $stmt = $conn->query("
     SELECT u.id, u.name, u.email, t.team_name, t.college, t.logo_url
     FROM users u

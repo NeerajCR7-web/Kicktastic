@@ -8,8 +8,6 @@ if (empty($_SESSION['user_id']) || $_SESSION['role'] !== 'league_admin') {
     exit;
 }
 
-// … same fetch for logos, matches, etc. …
-// fetch the same data as public index
 $teamLogos = [];
 $teamsResult = $conn->query("SELECT logo_url FROM teams ORDER BY id ASC");
 while ($row = $teamsResult->fetch_assoc()) {
@@ -30,7 +28,6 @@ $soccerImages = ['../assets/images/1.png',
     '../assets/images/14.jpg',
     '../assets/images/15.jpg'];
 
-// ----- Build group-stage matches for schedule preview -----
 $allTeams = [];
 $allTeamsResult = $conn->query("SELECT id, team_name, logo_url FROM teams ORDER BY id ASC");
 while ($row = $allTeamsResult->fetch_assoc()) {
@@ -57,9 +54,8 @@ if (count($allTeams) === 8) {
     }
 
     $groupA_matches = getMatches($groupA); // 6 matches
-    $groupB_matches = getMatches($groupB); // 6 matches
+    $groupB_matches = getMatches($groupB); 
 
-    // ----- Compute Standings for Group A & Group B -----
     $statsA = [];
     foreach ($groupA as $team) {
         $statsA[$team['id']] = [
@@ -79,7 +75,6 @@ if (count($allTeams) === 8) {
         ];
     }
 
-    // Build name→ID lookup for group teams
     $nameToIdA = [];
     foreach ($groupA as $t) {
         $nameToIdA[$t['team_name']] = $t['id'];
@@ -89,14 +84,12 @@ if (count($allTeams) === 8) {
         $nameToIdB[$t['team_name']] = $t['id'];
     }
 
-    // Fetch all saved match results
     $res = $conn->query("SELECT match_key, score1, score2 FROM match_results");
     while ($row = $res->fetch_assoc()) {
         $key = $row['match_key'];
         $s1  = intval($row['score1']);
         $s2  = intval($row['score2']);
 
-        // Group A matches: key starts with "A"
         if (strpos($key, 'A') === 0) {
             $idx = intval(substr($key, 1));
             if (isset($groupA_matches[$idx])) {
@@ -114,7 +107,6 @@ if (count($allTeams) === 8) {
                 }
             }
         }
-        // Group B matches: key starts with "B"
         elseif (strpos($key, 'B') === 0) {
             $idx = intval(substr($key, 1));
             if (isset($groupB_matches[$idx])) {
@@ -134,7 +126,6 @@ if (count($allTeams) === 8) {
         }
     }
 
-    // Sort each group’s standings by points descending
     usort($statsA, function($a, $b) {
         return $b['points'] - $a['points'];
     });
@@ -147,14 +138,11 @@ if (count($allTeams) === 8) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- same head as manager/index.php -->
    <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>KickTastic — Manager Home</title>
   <style>
-    /* copy all of your public index.css here… */
-     /* ===== 1. RESET ===== */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -173,7 +161,6 @@ if (count($allTeams) === 8) {
       color: inherit;
     }
 
-    /* ===== 2. TOP BAR ===== */
     .top-bar {
       background-color: #000;
       display: flex;
@@ -206,7 +193,6 @@ if (count($allTeams) === 8) {
       margin-top: -0.75rem;
     }
 
-    /* ===== 3. NAV MENU ===== */
     .menu-bar {
       background-color: #3498db;
       display: flex;
@@ -225,7 +211,7 @@ if (count($allTeams) === 8) {
       border-radius: 4px;
     }
 
-    /* ===== 4. DROPDOWN ===== */
+    /* User Dropdown Menu */
     .user-menu, .dropdown { position: relative; flex-shrink: 0; }
 .dropdown-button, .user-button {
   padding: 0.5rem 1rem;
@@ -261,7 +247,7 @@ if (count($allTeams) === 8) {
   background: rgba(0,0,0,0.1);
 }
 
-/* ===== 5. SIGNIN BOXES ===== */
+/*Sign in Option*/
 .signin-container {
   display: flex;
   gap: 0.5rem;
@@ -284,7 +270,6 @@ if (count($allTeams) === 8) {
 }
 .register-link:hover { color: #3498db; }
 
-    /* ===== 5. TEAM LOGO SLIDER ===== */
     .team-slider-container {
       overflow: hidden;
       background: #fff;
@@ -313,7 +298,6 @@ if (count($allTeams) === 8) {
       }
     }
 
-    /* ===== 6. IMAGE SLIDER & CONTAINERS ===== */
     .content-section {
       display: flex;
       justify-content: space-between;
@@ -356,8 +340,6 @@ if (count($allTeams) === 8) {
     .slider-button.next {
       right: 8px;
     }
-
-    /* ===== 7. NEWS CONTAINER ===== */
     .news-container {
       width: 40%;
       height: 300px;
@@ -405,7 +387,6 @@ if (count($allTeams) === 8) {
       margin-top: 0.25rem;
     }
 
-    /* ===== 8. SCHEDULE PREVIEW ===== */
     .schedule-section {
       padding: 2rem 1rem;
       background: #000;
@@ -476,7 +457,6 @@ if (count($allTeams) === 8) {
       text-decoration: underline;
     }
 
-    /* ===== 9. STANDINGS PREVIEW WITH COLOR SCHEME ===== */
     .standings-section {
       background: #000;
       border-radius: 20px;
@@ -505,7 +485,7 @@ if (count($allTeams) === 8) {
       overflow: hidden;
     }
     .group-box .group-title {
-      background: #1e88e5; /* Blue header */
+      background: #1e88e5; 
       color: #fff;
       padding: 0.75rem;
       font-size: 1.125rem;
@@ -517,7 +497,7 @@ if (count($allTeams) === 8) {
       border-collapse: collapse;
     }
     .standings-table thead tr {
-      background: #000; /* Black header row */
+      background: #000; 
     }
     .standings-table thead th {
       color: #fff;
@@ -555,7 +535,6 @@ if (count($allTeams) === 8) {
       text-decoration: underline;
     }
 
-    /* ===== 10. FOOTER ===== */
     .site-footer {
       background-color: #000;
       color: #fff;
@@ -606,7 +585,6 @@ if (count($allTeams) === 8) {
       color: #ccc;
     }
 
-    /* ===== 11. PAGE CONTENT ===== */
     .page-content {
       padding: 2rem 1rem;
       text-align: center;
@@ -645,8 +623,7 @@ if (count($allTeams) === 8) {
     .user-menu-content.show{display:block; top: -8px;}
     .user-menu-content a{display:block;padding:.5rem 1rem;color:#000;border-radius:4px;text-decoration:none}
     .user-menu-content a:hover{background:rgba(0,0,0,0.1)}
-    /*…then the rest of your public index styles… */
-     /* ===== 12. RESPONSIVE TWEAKS ===== */
+   
     @media (min-width: 768px) {
       .slider-container {
         width: 60%;
@@ -703,13 +680,7 @@ if (count($allTeams) === 8) {
       }
     }
   </style>
-   <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    integrity="sha512-dyZtEEryLpVBj+K6wwd7U8pmPr9/zTOuV/CfiE6sJor0L0F7kk8V1fqTJyVq2mZV9yfeHcC5IuUlG97+MURyZA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+ 
 </head>
 </head>
 <body>
@@ -728,7 +699,6 @@ if (count($allTeams) === 8) {
     </div>
   </header>
 
-  <!-- then copy the rest of your public index.php markup here -->
 <nav class="menu-bar">
     <a href="index.php">Home</a>
     <a href="teams.php">Teams</a>
@@ -749,8 +719,6 @@ if (count($allTeams) === 8) {
     
 <?php endif; ?>
 
-  <!-- ===== TEAM LOGO SLIDER ===== -->
- <!-- ===== TEAM LOGO SLIDER ===== -->
 <?php if (count($allTeams) === 8): ?>
   <div class="team-slider-container">
     <div class="team-slider-track animate">
@@ -762,22 +730,16 @@ if (count($allTeams) === 8) {
 <?php endif; ?>
 
 
-  <!-- ===== IMAGE SLIDER & NEWS SECTION ===== -->
   <section class="content-section">
-    <!-- Left: Image slider with prev/next buttons -->
     <div class="slider-container" id="sliderContainer">
       <button class="slider-button prev" id="prevBtn">&#8249;</button>
       <img src="<?= htmlspecialchars($soccerImages[0]) ?>" alt="Soccer Image" id="sliderImage">
       <button class="slider-button next" id="nextBtn">&#8250;</button>
     </div>
 
-    <!-- Right: News fetched from NewsAPI.org -->
     <div class="news-container" id="newsContainer">
-      <!-- JavaScript will inject news items here -->
     </div>
   </section>
-  <!-- Copy exactly everything from your public index.php below this header -->
-  <!-- … -->
    <section class="schedule-section">
   <div class="schedule-heading">Upcoming Matches</div>
   <div class="schedule-container">
@@ -821,7 +783,6 @@ if (count($allTeams) === 8) {
   </div>
 </section>
 
-<!-- ===== STANDINGS PREVIEW ===== -->
 <section class="standings-section">
   <div class="standings-heading">Live Group Standings</div>
   <?php if (!empty($statsA) && !empty($statsB)): ?>
@@ -869,7 +830,6 @@ if (count($allTeams) === 8) {
 
   
 
-  <!-- ===== FOOTER ===== -->
  <footer class="site-footer">
   <div class="footer-follow">
     <span class="follow-text">Follow Us On</span>
@@ -900,7 +860,6 @@ if (count($allTeams) === 8) {
     </div>
   </footer>
   <script>
-   // user‐menu toggle
     document.getElementById('userBtn').addEventListener('click', e => {
       e.stopPropagation();
       document.getElementById('userMenu').classList.toggle('show');
@@ -908,8 +867,6 @@ if (count($allTeams) === 8) {
     document.addEventListener('click', () => {
       document.getElementById('userMenu').classList.remove('show');
     });
-    // and your existing sliders/news scripts…
-    // Image slider functionality
     (function() {
       var images = <?php echo json_encode($soccerImages); ?>;
       var currentIndex = 0;
@@ -932,7 +889,6 @@ if (count($allTeams) === 8) {
       });
     })();
 
-    // Fetch and display news from NewsAPI.org
     (function() {
       var apiKey = '3a24bbdfb9a546f2bac0a19d0671104c';
       var query = encodeURIComponent('UEFA OR "nations league" OR "la liga" OR "league 1" OR bundesliga OR "FIFA world cup"');

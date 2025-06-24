@@ -2,12 +2,8 @@
 session_start();
 require '../includes/db.php';
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['../generate_schedule'])) {
-    // Your schedule generation logic here
 }
 
-// -----------------------------------------------------
-// 1) FETCH TEAMS (ORDERED BY id ASC)
-// -----------------------------------------------------
 $teams_result = $conn->query("SELECT id, team_name, logo_url FROM teams ORDER BY id ASC");
 $all_teams = [];
 while ($row = $teams_result->fetch_assoc()) {
@@ -43,24 +39,17 @@ if ($team_count !== 8) {
 }
 
 
-// Build lookup by team ID
 $teams_by_id = [];
 foreach ($all_teams as $t) {
     $teams_by_id[$t['id']] = $t;
 }
 
-// -----------------------------------------------------
-// 2) FETCH SAVED RESULTS INTO $results[match_key]
-// -----------------------------------------------------
 $results = [];
 $res = $conn->query("SELECT * FROM match_results");
 while ($r = $res->fetch_assoc()) {
     $results[$r['match_key']] = $r;
 }
 
-// -----------------------------------------------------
-// 3) SAVE/UPDATE A RESULT WHEN ADMIN SUBMITS THE FORM
-// -----------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['match_key'])) {
     $stmt = $conn->prepare("
         REPLACE INTO match_results 
@@ -80,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['match_key'])) {
     $stmt->execute();
     $stmt->close();
 
-    // Refresh $results so changes are visible immediately
     $results = [];
     $res2 = $conn->query("SELECT * FROM match_results");
     while ($r2 = $res2->fetch_assoc()) {
@@ -88,9 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['match_key'])) {
     }
 }
 
-// -----------------------------------------------------
-// 4) HELPER: ROUND-ROBIN PAIRINGS FOR A GROUP OF 4 TEAMS
-// -----------------------------------------------------
 function get_matches(array $group) {
     $pairs = [];
     for ($i = 0; $i < count($group); $i++) {
@@ -101,22 +86,16 @@ function get_matches(array $group) {
     return $pairs; // 6 matches per 4-team group
 }
 
-// -----------------------------------------------------
-// 5) SPLIT INTO GROUP A & GROUP B (first 4 vs next 4)
-// -----------------------------------------------------
 $groupA = array_slice($all_teams, 0, 4);
 $groupB = array_slice($all_teams, 4, 4);
 
-$groupA_matches = get_matches($groupA); // 6 matches
-$groupB_matches = get_matches($groupB); // 6 matches
+$groupA_matches = get_matches($groupA); 
+$groupB_matches = get_matches($groupB); 
 
 $start_date  = new DateTime('2025-08-01');
-$match_times = ["17:00", "19:00"]; // group stage times
+$match_times = ["17:00", "19:00"]; 
 
-// -----------------------------------------------------
-// 6) COMPUTE GROUP STATS TO DETERMINE RANKINGS
-//    (needed to know top 2 from each group for semis)
-// -----------------------------------------------------
+
 $statsA = [];
 foreach ($groupA as $team) {
     $statsA[$team['id']] = [
@@ -129,7 +108,7 @@ foreach ($groupA as $team) {
         'gf'      => 0,
         'ga'      => 0,
         'points'  => 0,
-        'form'    => [] // chronological 'W','D','L'
+        'form'    => [] 
     ];
 }
 $statsB = [];
@@ -148,7 +127,7 @@ foreach ($groupB as $team) {
     ];
 }
 
-// Tally Group A results
+
 for ($i = 0; $i < count($groupA_matches); $i++) {
     $match = $groupA_matches[$i];
     $t1    = $match[0];
@@ -203,7 +182,7 @@ usort($statsA, function($a, $b) {
     return $b['gf'] - $a['gf'];
 });
 
-// Tally Group B results
+
 for ($i = 0; $i < count($groupB_matches); $i++) {
     $match = $groupB_matches[$i];
     $t1    = $match[0];
@@ -258,9 +237,7 @@ usort($statsB, function($a, $b) {
     return $b['gf'] - $a['gf'];
 });
 
-// -----------------------------------------------------
-// 7) DETERMINE SEMIFINALISTS (TOP 2 FROM EACH GROUP)
-// -----------------------------------------------------
+
 $groupA_winner   = $statsA[0]['id'];
 $groupA_runnerup = $statsA[1]['id'];
 $groupB_winner   = $statsB[0]['id'];
@@ -294,9 +271,7 @@ $final_result = ($final_team1 && $final_team2 && isset($results['F1']))
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_schedule'])) {
     require '../generate_schedule.php';
 }
-// -----------------------------------------------------
-// 8) HTML OUTPUT STARTS HERE
-// -----------------------------------------------------
+
 ?>
 <?php include '../includes/header.php'; ?>
 <!DOCTYPE html>
@@ -374,14 +349,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_schedule']))
     </style>
     <script>
         function openModal(key) {
-            // Clear any previous values
+      
             document.getElementById('score1').value = '';
             document.getElementById('score2').value = '';
             document.getElementById('motm').value = '';
             document.getElementById('highlight_url').value = '';
             document.getElementById('goalscorers').value = '';
 
-            // If this match already has data- attributes, populate them
+            
             var box = document.getElementById(key);
             if (box) {
                 var existingScore1    = box.getAttribute('data-score1');
@@ -410,7 +385,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_schedule']))
 <body>
 
 
-    <!-- ========== GROUP A MATCHES ========== -->
+ 
     <h2>Group A Matches</h2>
     <?php
     for ($i = 0; $i < count($groupA_matches); $i++) {
@@ -422,7 +397,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_schedule']))
         $date->modify("+" . $i . " days");
         $dt    = $date->format('F j, Y') . " at " . $match_times[0];
 
-        // Prepare data- attributes for existing values:
         $ds1   = isset($results[$key]) ? intval($results[$key]['score1']) : '';
         $ds2   = isset($results[$key]) ? intval($results[$key]['score2']) : '';
         $dm    = isset($results[$key]) ? htmlspecialchars($results[$key]['motm'], ENT_QUOTES) : '';
@@ -459,7 +433,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_schedule']))
     }
     ?>
 
-    <!-- ========== GROUP B MATCHES ========== -->
     <h2>Group B Matches</h2>
     <?php
     for ($i = 0; $i < count($groupB_matches); $i++) {
@@ -507,10 +480,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_schedule']))
     }
     ?>
 
-    <!-- ========== KNOCKOUT STAGE ========== -->
     <h2>Knockout Stage</h2>
 
-    <!-- Semifinal 1 -->
     <?php
     $sf1_key = "SF1";
     $sf1_date = new DateTime('2025-08-07');
@@ -551,7 +522,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_schedule']))
     echo "</div>";
     ?>
 
-    <!-- Semifinal 2 -->
     <?php
     $sf2_key = "SF2";
     $sf2_date = new DateTime('2025-08-07');
@@ -592,7 +562,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_schedule']))
     echo "</div>";
     ?>
 
-    <!-- Final (only if both SF1 & SF2 have results) -->
     <?php if ($final_team1 && $final_team2): 
         $f_key   = "F1";
         $f_date  = new DateTime('2025-08-08');
@@ -633,7 +602,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_schedule']))
         echo "</div>";
     endif; ?>
 
-    <!-- ========== MODAL & OVERLAY ========== -->
     <div id="overlay" class="overlay" onclick="closeModal()"></div>
     <div id="modal" class="modal">
         <form method="post" action="schedule.php">

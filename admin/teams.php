@@ -1,9 +1,7 @@
 <?php
-// admin/teams.php
 session_start();
 require '../includes/db.php';
 
-// only allow league admins
 if (empty($_SESSION['user_id']) || $_SESSION['role'] !== 'league_admin') {
     header('Location: ../index.php');
     exit;
